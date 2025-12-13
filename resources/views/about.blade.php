@@ -22,7 +22,7 @@
 
                     <div>
                         <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Membangun Peradaban dari Masjid</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Masjid An-Nurul Fajri</h2>
                         <p class="text-gray-600 leading-relaxed mb-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam et eos porro, obcaecati
                             quaerat placeat similique exercitationem vero ea provident illo repellendus aut doloribus
@@ -53,10 +53,9 @@
                             </div>
                             <h3 class="text-xl font-bold text-gray-800">Visi Kami</h3>
                         </div>
-                        <p class="text-gray-600 italic font-medium">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, architecto a blanditiis
-                            ipsum unde ad, dolores ut reiciendis itaque, earum molestias! Blanditiis, totam? Temporibus
-                            voluptatibus perferendis voluptatum quis molestias non.
+                        <p class="text-gray-600 italic font-medium">Membangun generasi Manglayang berbasis islami yang unggul dalam bidang
+                            keagamaan, sosial, pendidikan dan kemanusiaan. Yang agamis, cerdas, kreatif,
+                            visioner dan berkepribadian yang berakhlaqul-karimah.
                         </p>
                     </div>
 
@@ -74,15 +73,20 @@
                         <ul class="space-y-3">
                             <li class="flex items-start text-gray-600">
                                 <span class="text-green-500 mr-2">✓</span>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consectetur eligendi
+                                Meningkatkan pendidikan dan pengajaran unggulan pada semua unit disiplin ilmu di bawah naungan Majlis Ta'lim Riyadhul Badi'ah.
                             </li>
                             <li class="flex items-start text-gray-600">
                                 <span class="text-green-500 mr-2">✓</span>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consectetur eligendi
+                                Membangun pusat pendidikan, dakwah, sosial dan kemanusiaan yang berbasis pemberdayaan masyarakat.
                             </li>
                             <li class="flex items-start text-gray-600">
                                 <span class="text-green-500 mr-2">✓</span>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consectetur eligendi
+                                Membangun citra/kepribadian yang mencintai dan bangga menjadi Muslim serta sebagai warga bangsa Indonesia yang menjadikan Islam 
+                                sebagai pedoman hidup dan kecintaannya terhadap Tanah air.
+                            </li>
+                                <li class="flex items-start text-gray-600">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Menyelenggarakan layanan sosial dan membantu pemberdayaan swadaya masyarakat.
                             </li>
                         </ul>
                     </div>
