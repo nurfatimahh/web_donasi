@@ -1,0 +1,47 @@
+<x-layout>
+    <x-slot:title>Masuk - DonasiKita</x-slot:title>
+
+    <section class="bg-green-700 bg-pattern text-center pt-16 pb-32 px-4 relative z-10">
+        <div class="container mx-auto">
+            <h1 class="text-white text-3xl font-bold mb-2">Selamat Datang Kembali</h1>
+            <p class="text-green-100 opacity-90">Silakan masuk untuk melanjutkan kebaikan Anda</p>
+        </div>
+    </section>
+
+    <main class="px-4 relative z-20 -mt-24 mb-20">
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border-t-4 border-amber-500">
+
+            <div class="p-8 md:p-10">
+                <div class="text-center mb-8">
+                    <span class="text-2xl font-extrabold text-green-700 tracking-tight">DonasiKita</span>
+                </div>
+
+                <form action="#" method="POST">
+                    <div class="mb-5 text-left">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" name="email"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                            placeholder="nama@email.com">
+                    </div>
+
+                    <div class="mb-6 text-left">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <input type="password" name="password"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                            placeholder="••••••••">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-amber-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-amber-600 transition shadow-md uppercase tracking-wide">
+                        MASUK SEKARANG
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center text-sm text-gray-500">
+                    Belum punya akun?
+                    <a href="/register" class="text-green-700 font-bold hover:underline">Daftar disini</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</x-layout>
