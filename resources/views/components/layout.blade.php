@@ -41,7 +41,7 @@
                         </svg>
                     </a>
 
-                    <a href="#" class="hover:text-amber-300 transition flex items-center gap-1">
+                    <a href="/program" class="hover:text-amber-300 transition flex items-center gap-1">
                         Program
                     </a>
 
