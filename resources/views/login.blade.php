@@ -16,7 +16,8 @@
                     <span class="text-2xl font-extrabold text-green-700 tracking-tight">DonasiKita</span>
                 </div>
 
-                <form action="#" method="POST">
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                         <input type="email" name="email"
