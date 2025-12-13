@@ -12,7 +12,6 @@ Route::get('/', function () {
 // Route untuk login - middleware guest (hanya untuk yang belum login)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
-
 // Route logout - hanya untuk yang sudah login
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
