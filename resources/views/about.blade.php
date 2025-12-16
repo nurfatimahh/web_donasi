@@ -23,16 +23,19 @@
 
                     <div>
                         <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Majelis Ta’lim Riyadhul Badi’ah</h2>
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Masjid An-Nurul Fajri</h2>
                         <p class="text-gray-600 leading-relaxed mb-4">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam et eos porro, obcaecati
-                            quaerat placeat similique exercitationem vero ea provident illo repellendus aut doloribus
-                            repellat earum fugiat animi. Ipsum, eos.
+                            Dalam menyikapi perkembangan zaman yang begitu pesat, dibutuhkan lembaga
+                            pendidikan (dalam hal ini Agama Islam) yang mampu menjadi tempat yang nyaman dan aman dalam proses belajar mengajarnya dengan segala kelengkapan sarana
+                            dan prasarananya yang mendukung agar bisa memaksimalkan potensi-potensi Santriyin/Santriyat. Sehingga apa yang sudah diusahakan bisa menghasilkan
+                            generasi-generasi harapan kita semua. Majelis Ta'lim Riyadhul Badi'ah merupakan lembaga pendidikan yang berbasis salafi yang berpedoman pada Pancasila dan Undang-undang Dasar 1945.
                         </p>
                         <p class="text-gray-600 leading-relaxed">
-                            Tujuan Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit omnis excepturi maiores
-                            totam eaque fugit ipsam odit labore voluptatibus quia eos vel itaque, ut ipsum aperiam ab
-                            temporibus possimus mollitia!
+                            Majelis Ta’lim Riyadhul Badi’ah bertujuan sebagai sarana ibadah untuk mendekatkan diri kepada Allah SWT serta meningkatkan keimanan dan ketakwaan. Selain itu,
+                            majelis ini menjadi wadah syiar dakwah dan penguatan ukhuwah Islamiyah berlandaskan Ahlussunnah wal Jama’ah, membina pemahaman aqidah melalui pengajian rutin,
+                            serta mendidik generasi muda agar berakhlakul karimah dan berprestasi melalui pendidikan Al-Qur’an. Majelis ini juga berperan mempererat persatuan dan mencetak
+                            generasi unggul yang siap bersosialisasi dan berkontribusi positif di masyarakat.
                         </p>
                     </div>
                 </div>
