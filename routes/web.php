@@ -14,9 +14,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('gue
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 // Route logout - hanya untuk yang sudah login
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/login', function () {
-    return view('login');
-});
+
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -29,6 +27,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-// Register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
+Route::get('/program', function () {
+    return view('program');
+});

@@ -23,6 +23,7 @@
                     <div>
                         <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3>
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Majelis Ta’lim Riyadhul Badi’ah</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Masjid An-Nurul Fajri</h2>
                         <p class="text-gray-600 leading-relaxed mb-4">
                             Dalam menyikapi perkembangan zaman yang begitu pesat, dibutuhkan lembaga
                             pendidikan (dalam hal ini Agama Islam) yang mampu menjadi tempat yang nyaman dan aman dalam proses belajar mengajarnya dengan segala kelengkapan sarana
