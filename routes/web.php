@@ -29,6 +29,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-// Register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
+Route::get('/program', function () {
+    return view('program');
+});
