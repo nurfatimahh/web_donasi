@@ -28,7 +28,15 @@ Route::get('/contact', function () {
 Route::get('/about', function () {
     return view('about');
 });
+<<<<<<< HEAD
+
 
 Route::get('/program', function () {
     return view('program');
 });
+=======
+
+Route::get('/program', function () {
+    return view('program');
+});
+>>>>>>> 0fcf0d26586b277f58836ec2e13a42b6f763a3f6
