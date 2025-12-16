@@ -1,4 +1,5 @@
 <x-layout>
+
     <x-slot:title>Masuk - DonasiKita</x-slot:title>
 
     <section class="bg-green-700 bg-pattern text-center pt-16 pb-32 px-4 relative z-10">
@@ -16,7 +17,8 @@
                     <span class="text-2xl font-extrabold text-green-700 tracking-tight">DonasiKita</span>
                 </div>
 
-                <form action="#" method="POST">
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                         <input type="email" name="email"

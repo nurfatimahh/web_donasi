@@ -1,109 +1,154 @@
 <x-layout>
-    <x-slot:title>Program Donasi - DonasiKita</x-slot:title>
+    <x-navbar></x-navbar>
 
-    <!-- Dummy data -->
-    @php
-        $programs = [
-            (object) [
-                'id' => 1,
-                'title' => 'Bantu Pendidikan Anak Yatim Piatu',
-                'image' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop',
-                'description' => 'Ribuan anak terancam putus sekolah. Mari bantu mereka menggapai cita-cita dengan beasiswa pendidikan yang layak.',
-                'target_amount' => 100000000,
-                'collected_amount' => 45000000,
-                'is_urgent' => true
-            ],
-            (object) [
-                'id' => 2,
-                'title' => 'Sedekah Jumat: Berbagi Nasi Bungkus',
-                'image' => 'https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop',
-                'description' => 'Rutin setiap hari Jumat kita membagikan makanan gratis untuk kaum dhuafa dan pekerja jalanan di sekitar kita.',
-                'target_amount' => 15000000,
-                'collected_amount' => 8500000,
-                'is_urgent' => false
-            ],
-            (object) [
-                'id' => 3,
-                'title' => 'Tanggap Darurat Bencana Banjir Demak',
-                'image' => 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800&auto=format&fit=crop',
-                'description' => 'Bantuan logistik, obat-obatan, dan selimut untuk saudara kita yang terdampak banjir bandang di daerah Demak.',
-                'target_amount' => 200000000,
-                'collected_amount' => 120000000,
-                'is_urgent' => true
-            ],
-        ];
-    @endphp
-
-    <section class="bg-green-700 bg-pattern text-center pt-16 pb-32 px-4 relative z-10">
+    {{-- HEADER BESAR YANG SAMA DENGAN WELCOME.BLADE.PHP --}}
+    <section class="bg-green-700 bg-pattern text-center pt-10 pb-48 px-4 relative z-10">
         <div class="container mx-auto">
-            <h3 class="text-amber-300 text-sm font-bold uppercase tracking-widest mb-2">Program Unggulan</h3>
-            <h1 class="text-white text-3xl md:text-4xl font-bold mb-4">Salurkan Kebaikan Anda</h1>
-            <p class="text-green-100 opacity-90 max-w-2xl mx-auto">
-                Pilih program kebaikan yang ingin Anda bantu hari ini.
-            </p>
+            <h3 class="text-amber-300 text-xl font-bold mb-3 tracking-wide drop-shadow-sm">Jariah Abadi</h3>
+            <h1 class="text-white text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-md">
+                Wujudkan Masjid Impian, Satukan Amal Kita
+            </h1>
         </div>
     </section>
 
-    <main class="px-4 relative z-20 -mt-24 mb-20">
-        <div class="container mx-auto max-w-6xl">
+    {{-- KONTEN UTAMA DIBUNGKUS DENGAN MARGIN NEGATIF UNTUK OVERLAP --}}
+    <main class="px-4 relative z-20 -mt-32 mb-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg border-l-4 border-amber-500 mb-10">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-bold text-green-700">Progres Dana Terkumpul</h3>
+                    <span class="text-green-700 font-extrabold">37%</span>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div class="bg-amber-500 h-full" style="width: 37%"></div>
+                </div>
 
-                @foreach($programs as $program)
-                    <div
-                        class="bg-white rounded-xl shadow-xl overflow-hidden hover:-translate-y-1 transition duration-300 border border-gray-100 flex flex-col h-full">
+                <div class="flex justify-between text-sm text-gray-600 font-medium mt-2">
+                    <span>Rp 185.000.000</span>
+                    <span>Target: Rp 500.000.000</span>
+                </div>
+            </div>
 
-                        {{-- GAMBAR --}}
-                        <div class="h-48 bg-gray-200 relative overflow-hidden group">
-                            <img src="{{ Str::startsWith($program->image, 'http') ? $program->image : ($program->image ? asset('storage/' . $program->image) : 'https://placehold.co/600x400?text=No+Image') }}"
-                                alt="{{ $program->title }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gray-800">Pilih Jenis Bantuan Anda</h3>
 
-                            @if($program->is_urgent)
-                                <div
-                                    class="absolute top-0 right-0 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-sm">
-                                    Mendesak
-                                </div>
-                            @endif
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border-t-8 border-green-700">
+                        <div class="text-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto text-green-700" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <h2 class="text-2xl font-bold mt-3 text-green-700">Donasi Uang Tunai</h2>
+                            <p class="text-gray-500 text-sm">Dana akan langsung digunakan untuk membeli material.</p>
                         </div>
 
-                        {{-- KONTEN --}}
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="font-bold text-xl text-gray-800 mb-2 line-clamp-2 hover:text-green-700 transition">
-                                {{ $program->title }}
-                            </h3>
+                        <form action="#" method="POST">
+                            <h4 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Nominal Donasi</h4>
 
-                            <p class="text-gray-500 text-sm mb-4 line-clamp-2 flex-grow">
-                                {{ Str::limit($program->description, 100) }}
-                            </p>
-
-                            {{-- PROGRESS BAR --}}
-                            <div class="mb-4 mt-auto">
-                                <div class="flex justify-between text-xs font-semibold mb-1">
-                                    <span class="text-green-700">Terkumpul: Rp
-                                        {{ number_format($program->collected_amount, 0, ',', '.') }}</span>
-                                    <span class="text-gray-400">Target: Rp
-                                        {{ number_format($program->target_amount / 1000000, 0, ',', '.') }}jt</span>
-                                </div>
-
-                                @php
-                                    $percent = ($program->collected_amount / $program->target_amount) * 100;
-                                    $width = $percent > 100 ? 100 : $percent;
-                                @endphp
-
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: {{ $width }}%"></div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-semibold mb-2">Pilih Nominal Cepat:</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button type="button"
+                                        class="bg-gray-100 border border-gray-300 text-gray-800 hover:bg-amber-100 hover:border-amber-500 py-3 rounded-lg font-bold transition duration-150">Rp
+                                        50.000</button>
+                                    <button type="button"
+                                        class="bg-gray-100 border border-gray-300 text-gray-800 hover:bg-amber-100 hover:border-amber-500 py-3 rounded-lg font-bold transition duration-150">Rp
+                                        100.000</button>
+                                    <button type="button"
+                                        class="bg-gray-100 border border-gray-300 text-gray-800 hover:bg-amber-100 hover:border-amber-500 py-3 rounded-lg font-bold transition duration-150">Rp
+                                        250.000</button>
+                                    <button type="button"
+                                        class="bg-gray-100 border border-gray-300 text-gray-800 hover:bg-amber-100 hover:border-amber-500 py-3 rounded-lg font-bold transition duration-150">Rp
+                                        500.000</button>
                                 </div>
                             </div>
 
-                            <a href="/program/{{ $program->id }}"
-                                class="block w-full text-center bg-green-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-800 transition shadow-md">
-                                Donasi Sekarang
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+                            <div class="mb-6">
+                                <label for="uang_nominal" class="block text-gray-700 font-semibold mb-2">Masukkan
+                                    Nominal Lain</label>
+                                <input type="text" name="uang_nominal" id="uang_nominal" placeholder="Contoh: 1.000.000"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg text-lg focus:ring-amber-500 focus:border-amber-500">
+                            </div>
 
+                            <div class="mb-6 border-t pt-4 border-gray-200">
+                                <label for="uang_nama" class="block text-gray-700 font-semibold mb-2">Nama Donatur
+                                    (Pilihan)</label>
+                                <input type="text" name="uang_nama" id="uang_nama"
+                                    placeholder="Tulis nama atau 'Hamba Allah'"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500">
+                            </div>
+
+                            <button type="button" disabled
+                                class="w-full bg-amber-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-amber-600 transition duration-200 opacity-75 cursor-not-allowed">
+                                Lanjut ke Pembayaran Uang
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border-t-8 border-amber-500">
+                        <div class="text-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto text-amber-500" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            <h2 class="text-2xl font-bold mt-3 text-amber-500">Donasi Bahan Bangunan</h2>
+                            <p class="text-gray-500 text-sm">Kami akan menjemput material di lokasi Anda.</p>
+                        </div>
+
+                        <form action="#" method="POST">
+                            <h4 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Detail Material</h4>
+
+                            <div class="mb-4">
+                                <label for="barang_jenis" class="block text-gray-700 font-semibold mb-2">Jenis
+                                    Bahan</label>
+                                <select name="barang_jenis" id="barang_jenis"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500">
+                                    <option value="">-- Pilih Jenis Bantuan --</option>
+                                    <option value="semen">Semen (Sak)</option>
+                                    <option value="pasir">Pasir (m³)</option>
+                                    <option value="batu_bata">Batu Bata/Batako (Pcs)</option>
+                                    <option value="besi">Besi (Batang)</option>
+                                    <option value="keramik">Keramik (Box)</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="barang_jumlah"
+                                    class="block text-gray-700 font-semibold mb-2">Jumlah/Volume</label>
+                                <input type="text" name="barang_jumlah" id="barang_jumlah"
+                                    placeholder="Contoh: 50 sak / 3 m³ pasir"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500">
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="barang_lokasi" class="block text-gray-700 font-semibold mb-2">Alamat
+                                    Penjemputan</label>
+                                <textarea name="barang_lokasi" id="barang_lokasi" rows="3"
+                                    placeholder="Alamat lengkap lokasi bahan bangunan"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500"></textarea>
+                            </div>
+
+                            <div class="mb-6 border-t pt-4 border-gray-200">
+                                <label for="barang_nama" class="block text-gray-700 font-semibold mb-2">Nama Donatur
+                                    (Pilihan)</label>
+                                <input type="text" name="barang_nama" id="barang_nama"
+                                    placeholder="Tulis nama atau 'Hamba Allah'"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500">
+                            </div>
+
+                            <button type="button" disabled
+                                class="w-full bg-green-700 text-white font-bold py-3 rounded-lg shadow-md hover:bg-green-800 transition duration-200 opacity-75 cursor-not-allowed">
+                                Konfirmasi Donasi Material
+                            </button>
+                        </form>
+                    </div>
+                </div> {{-- Akhir Grid Dua Kolom --}}
             </div>
         </div>
     </main>
