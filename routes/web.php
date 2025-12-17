@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\NeedController;
+use App\Http\Controllers\DonationController;
 
 
 Route::get('/', function () {
@@ -32,3 +36,25 @@ Route::get('/program', function () {
     return view('program');
 });
 
+// Dashboard - hanya untuk user yang sudah login
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
+
+// Backend CRUD (create & read) per tabel - dilindungi auth
+Route::middleware('auth')->group(function () {
+    // Program
+    Route::resource('programs', ProgramController::class)->only([
+        'index', 'create', 'store',
+    ]);
+
+    // Needs
+    Route::resource('needs', NeedController::class)->only([
+        'index', 'create', 'store',
+    ]);
+
+    // Donations
+    Route::resource('donations', DonationController::class)->only([
+        'index', 'create', 'store',
+    ]);
+});
