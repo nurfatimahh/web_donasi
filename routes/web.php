@@ -27,6 +27,8 @@ Route::get('/about', function () {
     return view('about');
 });
 
+
 Route::get('/program', function () {
     return view('program');
 });
+

@@ -1,4 +1,5 @@
 <x-layout>
+    <x-navbar></x-navbar>
     <x-slot:title>Home</x-slot:title>
 
     <section class="bg-green-700 bg-pattern text-center pt-10 pb-48 px-4 relative z-10">
