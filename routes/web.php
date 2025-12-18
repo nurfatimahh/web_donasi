@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\NeedController;
+use App\Http\Controllers\DonationController;
 
 
 Route::get('/', function () {
@@ -14,9 +18,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('gue
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 // Route logout - hanya untuk yang sudah login
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/login', function () {
-    return view('login');
-});
+
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -34,14 +36,25 @@ Route::get('/program', function () {
     return view('program');
 });
 
-Route::get('/admin/dashboard', function () { 
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+// Dashboard - hanya untuk user yang sudah login
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
 
-Route::get('/admin/program', function () { 
-    return view('admin.program.index');
-});
+// Backend CRUD (create & read) per tabel - dilindungi auth
+Route::middleware('auth')->group(function () {
+    // Program
+    Route::resource('programs', ProgramController::class)->only([
+        'index', 'create', 'store',
+    ]);
 
-Route::get('/admin/program/create', function () { 
-    return view('admin.program.create');
+    // Needs
+    Route::resource('needs', NeedController::class)->only([
+        'index', 'create', 'store',
+    ]);
+
+    // Donations
+    Route::resource('donations', DonationController::class)->only([
+        'index', 'create', 'store',
+    ]);
 });

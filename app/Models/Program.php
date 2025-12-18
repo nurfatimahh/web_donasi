@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Program extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'nama_program',
         'deskripsi',
-        'gambar'
+        'gambar',
+        'tanggal_mulai',
+        'tanggal_selesai',
     ];
 }

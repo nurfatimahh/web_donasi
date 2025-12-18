@@ -2,39 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Donation extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'nama_donatur',
-        'jenis_donasi',       // uang | material
-        'nominal',            // untuk donasi uang
-        'need_id',            // nullable (jika donasi material)
-        'jumlah_barang',      // jumlah material
+        'jenis_donasi',
+        'nominal',
+        'need_id',
+        'jumlah_barang',
         'bukti_transfer',
-        'status'              // pending | sukses | ditolak
+        'status'
     ];
 
-    /**
-     * Relasi:
-     * Donasi dimiliki oleh satu user
-     */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Relasi:
-     * Donasi material mengarah ke satu kebutuhan
-     */
-    public function need()
-    {
+    public function need(){
         return $this->belongsTo(Need::class);
     }
 }
