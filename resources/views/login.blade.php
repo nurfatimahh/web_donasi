@@ -1,4 +1,5 @@
 <x-layout>
+
     <x-slot:title>Masuk - DonasiKita</x-slot:title>
 
     <section class="bg-green-700 bg-pattern text-center pt-16 pb-32 px-4 relative z-10">

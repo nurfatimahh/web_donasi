@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>Registrasi - DonasiKita</x-slot:title>
 
-    <section class="bg-green-700 bg-pattern text-center pt-16 pb-32 px-4 relative z-10">
+    <section class="bg-green-700 bg-pattern text-center pt-10 pb-32 px-4 relative z-10">
         <div class="container mx-auto">
             <h1 class="text-white text-3xl font-bold mb-2">Bergabung dalam Kebaikan</h1>
             <p class="text-green-100 opacity-90">Mulai langkah kecil Anda hari ini untuk dampak yang besar</p>
