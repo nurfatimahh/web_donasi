@@ -32,3 +32,15 @@ Route::get('/about', function () {
 Route::get('/program', function () {
     return view('program');
 });
+
+Route::get('/admin/dashboard', function () { 
+    return view('admin.dashboard');
+})->name('admin.dashboard');
+
+Route::get('/admin/program', function () { 
+    return view('admin.program.index');
+});
+
+Route::get('/admin/program/create', function () { 
+    return view('admin.program.create');
+});
