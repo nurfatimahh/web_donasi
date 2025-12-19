@@ -26,7 +26,7 @@
     {{ $slot }}
 
     <footer class="mt-auto py-6 text-center text-stone-50 text-sm bg-green-700">
-        &copy; 2024 DonasiKita
+        &copy; 2025 DonasiKita
     </footer>
 
 </body>

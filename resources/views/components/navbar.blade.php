@@ -6,6 +6,9 @@
         </div>
         <!-- Nav -->
         <nav class="hidden md:flex items-center space-x-8 font-bold text-sm">
+            <a href="/" class="hover:text-amber-300 transition flex items-center gap-1">
+                Home
+            </a>
             <div class="flex space-x-6">
                 <a href="/about" class="hover:text-amber-300 transition flex items-center gap-1 group">
                     Tentang Kami
@@ -30,10 +33,20 @@
 
             </div>
             <div class="flex items-center space-x-3 ml-6">
-                <a href="/login"
-                    class="bg-amber-500 text-white px-6 py-2 rounded text-xs font-bold hover:bg-amber-600 transition shadow-lg uppercase tracking-wider inline-block">
-                    DONASI
-                </a>
+                @auth
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit"
+                            class="text-gray-300 hover:bg-green-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="text-gray-300 hover:bg-green-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                        Login
+                    </a>
+                @endauth
             </div>
         </nav>
     </div>

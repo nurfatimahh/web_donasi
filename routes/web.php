@@ -36,6 +36,11 @@ Route::get('/program', function () {
     return view('program');
 });
 
+Route::get('/donasi', function () {
+    return view('donasi');
+});
+
+
 // Dashboard - hanya untuk user yang sudah login
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
