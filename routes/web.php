@@ -36,41 +36,49 @@ Route::get('/program', function () {
     return view('program');
 });
 
+Route::get('/program', function () {
+    // ngambil data program dari database
+    $programs = \App\Models\Program::latest()->get();
+    return view('program', compact('programs'));
+});
+
 Route::get('/donasi', function () {
     return view('donasi');
 });
 
 
-// Dashboard - hanya untuk user yang sudah login
+// Dashboard & backend CRUD - hanya untuk user yang sudah login
 Route::middleware('auth')->group(function () {
-    // Dashboard admin
+    // Dashboard utama (bisa diarahkan ke admin layout)
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
-    
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-        ->name('admin.dashboard');
 
-    // Backend CRUD (create & read) per tabel
-    // Program
-    Route::resource('programs', ProgramController::class)->only([
-        'index', 'create', 'store',
-    ]);
+    // Grup route admin dengan prefix URL /admin dan prefix nama admin.
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // Dashboard admin
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
 
-    // Needs
+        // Program (CRUD create + read)
+        Route::resource('programs', ProgramController::class)->only([
+            'index',
+            'create',
+            'store',
+        ]);
+
+        // (Nanti bisa ditambahkan resources lain seperti needs & donations versi admin)
+    });
+
+    // Backend CRUD umum (tanpa prefix admin) - opsional jika masih dipakai
     Route::resource('needs', NeedController::class)->only([
-        'index', 'create', 'store',
+        'index',
+        'create',
+        'store',
     ]);
 
-    // Donations
     Route::resource('donations', DonationController::class)->only([
-        'index', 'create', 'store',
+        'index',
+        'create',
+        'store',
     ]);
 });
-
-    Route::get('/admin/program', function () { 
-        return view('admin.program.index');
-    });
-
-    Route::get('/admin/program/create', function () { 
-        return view('admin.program.create');
-    });
