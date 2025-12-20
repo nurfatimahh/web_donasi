@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\NeedController;
+use App\Http\Controllers\DonationController;
 
 
 Route::get('/', function () {
@@ -28,12 +32,42 @@ Route::get('/about', function () {
 });
 
 
+//Tes tes 
 Route::get('/program', function () {
-    return view('program');
+    // ngambil data program dari database
+    $programs = \App\Models\Program::latest()->get();
+    return view('program', compact('programs'));
 });
 
-Route::get('/donasi', function () {
-    return view('donasi');
-});
+// Dashboard - hanya untuk user yang sudah login
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
 
+// Backend CRUD (create & read) per tabel - dilindungi auth
+// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->name('admin.')->group(
+    function () {
+        // Program
+        Route::resource('programs', ProgramController::class)->only([
+            'index',
+            'create',
+            'store',
+        ]);
 
+        // Needs
+        Route::resource('needs', NeedController::class)->only([
+            'index',
+            'create',
+            'store',
+        ]);
+
+        // Donations
+        Route::resource('donations', DonationController::class)->only([
+            'index',
+            'create',
+            'store',
+        ]);
+    }
+
+);

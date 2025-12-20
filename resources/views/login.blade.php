@@ -19,18 +19,29 @@
 
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
+
+                    @if ($errors->any())
+                        <div class="mb-5 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded shadow-sm">
+                            <ul class="list-disc list-inside text-sm">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                        <input type="email" name="email"
+                        <input type="email" name="email" value="{{ old('email') }}"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="nama@email.com">
+                            placeholder="nama@email.com" required autofocus>
                     </div>
 
                     <div class="mb-6 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                         <input type="password" name="password"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="••••••••">
+                            placeholder="••••••••" required>
                     </div>
 
                     <button type="submit"
