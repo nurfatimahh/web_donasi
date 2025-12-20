@@ -18,8 +18,8 @@
             </div>
             <nav class="mt-6 space-y-1">
                 <a href="/admin/programs" class="block px-6 py-3 hover:bg-emerald-500">Program Donasi</a>
-                <a href="/admin/needs" class="block px-6 py-3 hover:bg-emerald-600">Kebutuhan Material</a>
-                <a href="/admin/donations" class="block px-6 py-3 hover:bg-emerald-600">Transaksi Donasi</a>
+                <a href="/needs" class="block px-6 py-3 hover:bg-emerald-600">Kebutuhan Material</a>
+                <a href="/donations" class="block px-6 py-3 hover:bg-emerald-600">Transaksi Donasi</a>
                 <a href="#" class="block px-6 py-3 hover:bg-emerald-600">Laporan</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

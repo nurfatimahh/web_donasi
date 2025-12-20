@@ -25,7 +25,7 @@
                         <td class="px-4 py-3 border">{{ $p->tanggal_mulai }} s/d {{ $p->tanggal_selesai }}</td>
                         <td class="px-4 py-3 border text-center space-x-2">
                             <button onclick='openModal("modalProgram", "edit", @json($p))' class="text-blue-600">Edit</button>
-                            <form action="/admin/program/{{ $p->id }}" method="POST" class="inline">
+                            <form action="/admin/programs/{{ $p->id }}" method="POST" class="inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="text-red-600" onclick="return confirm('Hapus?')">Hapus</button>
                             </form>
@@ -39,7 +39,7 @@
     <div id="modalProgram" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
             <h3 id="modalTitle" class="text-xl font-bold mb-4">Tambah Program</h3>
-            <form id="formProgram" method="POST" action="/admin/program" enctype="multipart/form-data">
+            <form id="formProgram" method="POST" action="/admin/programs" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" id="formMethod" value="POST">
                 <div class="space-y-4">
@@ -93,7 +93,7 @@
 
             if (mode === 'edit') {
                 title.innerText = 'Edit Program';
-                form.action = '/admin/program/' + data.id;
+                form.action = '/admin/programs/' + data.id;
                 method.value = 'PUT';
                 document.getElementById('nama_program').value = data.nama_program;
                 document.getElementById('deskripsi').value = data.deskripsi;
@@ -103,7 +103,7 @@
                 document.getElementById('gambar').value = "";
             } else {
                 title.innerText = 'Tambah Program';
-                form.action = '/admin/program';
+                form.action = '/admin/programs';
                 method.value = 'POST';
                 form.reset();
             }

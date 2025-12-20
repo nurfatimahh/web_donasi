@@ -55,11 +55,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        // Program (CRUD create + read)
+        // Program (CRUD lengkap untuk admin)
         Route::resource('programs', ProgramController::class)->only([
             'index',
             'create',
             'store',
+            'edit',
+            'update',
+            'destroy',
         ]);
 
         // (Nanti bisa ditambahkan resources lain seperti needs & donations versi admin)
