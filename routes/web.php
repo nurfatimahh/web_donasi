@@ -42,12 +42,15 @@ Route::get('/donasi', function () {
 
 
 // Dashboard - hanya untuk user yang sudah login
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('dashboard');
-
-// Backend CRUD (create & read) per tabel - dilindungi auth
 Route::middleware('auth')->group(function () {
+    // Dashboard admin
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+    
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    // Backend CRUD (create & read) per tabel
     // Program
     Route::resource('programs', ProgramController::class)->only([
         'index', 'create', 'store',
@@ -63,10 +66,6 @@ Route::middleware('auth')->group(function () {
         'index', 'create', 'store',
     ]);
 });
-    //Url sementara
-    Route::get('/admin/dashboard', function () { 
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
 
     Route::get('/admin/program', function () { 
         return view('admin.program.index');
