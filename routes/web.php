@@ -33,10 +33,6 @@ Route::get('/about', function () {
 
 
 Route::get('/program', function () {
-    return view('program');
-});
-
-Route::get('/program', function () {
     // ngambil data program dari database
     $programs = \App\Models\Program::latest()->get();
     return view('program', compact('programs'));
@@ -59,11 +55,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        // Program (CRUD create + read)
+        // Program (CRUD lengkap untuk admin)
         Route::resource('programs', ProgramController::class)->only([
             'index',
             'create',
             'store',
+            'edit',
+            'update',
+            'destroy',
         ]);
 
         // (Nanti bisa ditambahkan resources lain seperti needs & donations versi admin)

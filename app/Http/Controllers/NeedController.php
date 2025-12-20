@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Need;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // tes doang
 
 class NeedController extends Controller
 {
@@ -44,7 +43,6 @@ class NeedController extends Controller
       $validated['jumlah_terkumpul'] = 0;
     }
 
-    // tes komentar
     Need::create($validated);
 
     return redirect()->route('needs.index')
