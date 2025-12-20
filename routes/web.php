@@ -32,42 +32,49 @@ Route::get('/about', function () {
 });
 
 
-//Tes tes 
 Route::get('/program', function () {
     // ngambil data program dari database
     $programs = \App\Models\Program::latest()->get();
     return view('program', compact('programs'));
 });
 
-// Dashboard - hanya untuk user yang sudah login
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('dashboard');
+Route::get('/donasi', function () {
+    return view('donasi');
+});
 
-// Backend CRUD (create & read) per tabel - dilindungi auth
-// Route::middleware('auth')->group(function () {
-Route::middleware('auth')->name('admin.')->group(
-    function () {
-        // Program
+
+// Dashboard & backend CRUD - hanya untuk user yang sudah login
+Route::middleware('auth')->group(function () {
+    // Dashboard utama (bisa diarahkan ke admin layout)
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    // Grup route admin dengan prefix URL /admin dan prefix nama admin.
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // Dashboard admin
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
+        // Program (CRUD create + read)
         Route::resource('programs', ProgramController::class)->only([
             'index',
             'create',
             'store',
         ]);
 
-        // Needs
-        Route::resource('needs', NeedController::class)->only([
-            'index',
-            'create',
-            'store',
-        ]);
+        // (Nanti bisa ditambahkan resources lain seperti needs & donations versi admin)
+    });
 
-        // Donations
-        Route::resource('donations', DonationController::class)->only([
-            'index',
-            'create',
-            'store',
-        ]);
-    }
+    // Backend CRUD umum (tanpa prefix admin) - opsional jika masih dipakai
+    Route::resource('needs', NeedController::class)->only([
+        'index',
+        'create',
+        'store',
+    ]);
 
-);
+    Route::resource('donations', DonationController::class)->only([
+        'index',
+        'create',
+        'store',
+    ]);
+});

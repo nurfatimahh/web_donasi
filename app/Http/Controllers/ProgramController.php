@@ -15,7 +15,7 @@ class ProgramController extends Controller
     $programs = Program::latest()->paginate(10);
 
     // Frontend bisa membuat view 'programs.index' sendiri.
-    return view('programs.index', compact('programs'));
+    return view('admin.programs.index', compact('programs'));
   }
   // tes 
   /**
@@ -23,7 +23,7 @@ class ProgramController extends Controller
    */
   public function create()
   {
-    return view('programs.create');
+    return view('admin.programs.create');
   }
 
   /**
@@ -46,7 +46,7 @@ class ProgramController extends Controller
 
     Program::create($validated);
 
-    return redirect()->route('programs.index')
+    return redirect()->route('admin.programs.index')
       ->with('success', 'Program berhasil dibuat.');
   }
 }
