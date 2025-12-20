@@ -4,5 +4,5 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-    <p>Selamat datang di Dashboard Admin Donasi</p>
+<p>Selamat datang di Dashboard Admin Donasi</p>
 @endsection
