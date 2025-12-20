@@ -33,10 +33,6 @@ Route::get('/about', function () {
 
 
 Route::get('/program', function () {
-    return view('program');
-});
-
-Route::get('/program', function () {
     // ngambil data program dari database
     $programs = \App\Models\Program::latest()->get();
     return view('program', compact('programs'));
