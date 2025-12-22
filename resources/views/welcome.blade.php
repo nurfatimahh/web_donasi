@@ -1,13 +1,19 @@
 <x-layout>
     <x-navbar></x-navbar>
     <x-slot:title>Home</x-slot:title>
+
     <section class="bg-green-700 bg-pattern text-center pt-10 pb-36 px-4 relative z-10">
         <div class="container mx-auto">
-            <h3 class="text-amber-300 text-xl font-bold mb-3 tracking-wide drop-shadow-sm">Mari Berbagi</h3>
-            <h1 class="text-white text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-md">
-                Setiap Donasi Anda, Menyalakan Harapan Mereka
+            <h3 class="text-amber-300 text-xl md:text-2xl font-bold mb-3 tracking-wide drop-shadow-sm">
+                Pembangunan Masjid An-Nurul Fajri
+            </h3>
+            <h1 class="text-white text-2xl md:text-4xl leading-relaxed font-extrabold drop-shadow-md">
+                Mari bersama membangun rumah Allah sebagai pusat ibadah, pembinaan umat, dan persatuan masyarakat.
             </h1>
-            <br>
+            <p class="text-green-200 opacity-90 mt-4 mb-6">
+                Setiap donasi Anda adalah investasi akhirat yang tak ternilai harganya.
+            </p>
+
             <div class="pt-10 flex justify-center">
                 <label for="modal_saklar"
                     class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer">
@@ -17,7 +23,7 @@
         </div>
     </section>
 
-    <!-- Buat formya -->
+    <!-- Form Donasi -->
     <div class="flex justify-center">
         <input type="checkbox" id="modal_saklar" class="peer hidden" />
 
@@ -54,13 +60,11 @@
                             class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500">
                     </div>
 
-                    <div class="hidden peer-checked/uang:block space-y-4 animate-fadeIn text-left">
+                    <div class="hidden peer-checked/uang:block space-y-4 text-left">
                         <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
-                            <p class="text-[10px] text-amber-700 font-bold uppercase mb-1 text-left">Transfer Rekening
-                                BCA</p>
-                            <p class="text-xl font-mono font-bold text-amber-900 tracking-wider text-left">4532128840
-                            </p>
-                            <p class="text-xs text-amber-800 uppercase text-left font-bold">a.n ADE </p>
+                            <p class="text-[10px] text-amber-700 font-bold uppercase mb-1">Transfer Rekening BCA</p>
+                            <p class="text-xl font-mono font-bold text-amber-900 tracking-wider">4532128840</p>
+                            <p class="text-xs text-amber-800 uppercase font-bold">a.n ADE</p>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase">Nominal (Rp)</label>
@@ -69,89 +73,113 @@
                         </div>
                     </div>
 
-                    <div class="hidden peer-checked/material:block space-y-4 animate-fadeIn text-left">
+                    <div class="hidden peer-checked/material:block space-y-4 text-left">
                         <div class="bg-green-50 p-4 rounded-2xl border border-green-200 text-xs">
-                            <p class="font-bold text-green-700 mb-2 uppercase text-[10px]">Kebutuhan Masjid
-                            </p>
+                            <p class="font-bold text-green-700 mb-2 uppercase text-[10px]">Kebutuhan Masjid</p>
                             <div class="flex justify-between border-b border-green-100 pb-1 mb-1">
                                 <span>Semen Padang</span>
                                 <span class="font-bold text-red-600">Sisa: 45 Sak</span>
                             </div>
                             <div class="flex justify-between">
                                 <span>Besi Beton 12mm</span>
-                                <span class="font-bold text-red-600">Sisa: 12 Btg </span>
+                                <span class="font-bold text-red-600">Sisa: 12 Btg</span>
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase">Barang & Jumlah</label>
                             <input type="text" name="material" placeholder="Contoh: 10 Sak Semen"
-                                class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-green-500 text-left">
+                                class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-green-500">
                         </div>
                     </div>
 
                     <button type="submit"
-                        class="w-full bg-orange-500 text-white font-bold py-4 rounded-2xl hover:bg-orange-600 shadow-lg shadow-orange-200 transition-all transform active:scale-95">
+                        class="w-full bg-orange-500 text-white font-bold py-4 rounded-2xl hover:bg-orange-600 shadow-lg shadow-orange-200 transition-all active:scale-95">
                         Konfirmasi Donasi
                     </button>
                 </form>
             </div>
-            <label for="modal_saklar" class="absolute inset-0 -z-10 cursor-default"></label>
         </div>
     </div>
-    <!-- kontennya disini -->
-    <main class="px-4 relative z-20 -mt-32 mb-20">
-        <!-- <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-10 md:p-14 text-center">
 
-            <p class="text-gray-500 text-lg md:text-xl leading-relaxed mb-8 italic">
-                "Jika kamu menampakkan sedekahmu, itu baik. (Akan tetapi,) jika kamu menyembunyikannya dan memberikannya
-                kepada orang-orang fakir, itu lebih baik bagimu. Allah akan menghapus sebagian kesalahanmu. Allah
-                Mahateliti terhadap apa yang kamu kerjakan."
+    <!-- Konten -->
+    <main class="px-4 relative z-20 -mt-32 mb-20">
+
+        <!-- Ayat & Hadits -->
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-10 md:p-14 text-center mb-12">
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6 italic">
+                مَثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنْبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنْبُلَةٍ مِائَةُ حَبَّةٍ ۗ وَاللَّهُ يُضَاعِفُ لِمَنْ يَشَاءُ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ
+            </p>
+
+            <div class="inline-block mb-8">
+                <p class="text-green-800 font-bold text-lg bg-green-50 px-4 py-2 rounded-lg">
+                    QS. Al-Baqarah · Ayat 261
+                </p>
+            </div>
+
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-4 italic">
+                “Apabila seseorang meninggal dunia, maka terputuslah amalnya kecuali tiga perkara:
+                sedekah jariyah, ilmu yang bermanfaat, dan anak shalih yang mendoakannya.”
             </p>
 
             <div class="inline-block">
                 <p class="text-green-800 font-bold text-lg bg-green-50 px-4 py-2 rounded-lg">
-                    Al-Baqarah · Ayat 271
+                    HR. Muslim
                 </p>
             </div>
-        </div> -->
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div class="md:col-span-2 space-y-6">
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-left">Konten?</h2>
+                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-left">
+                        Pembangunan Masjid
+                    </h2>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est modi maiores sapiente nisi,
-                        pariatur
-                        minima aliquam omnis. Delectus facere doloremque inventore saepe corrupti est dolorum veniam
-                        nulla!
-                        Nam nostrum numquam id quos neque, aliquam porro aliquid deleniti non. Nulla delectus explicabo
-                        exercitationem expedita dicta ratione accusamus excepturi?
+                        Pembangunan Masjid An-Nurul Fajri merupakan ikhtiar bersama dalam menghadirkan sarana ibadah
+                        yang layak, nyaman, dan penuh keberkahan bagi masyarakat. Masjid ini diharapkan menjadi pusat
+                        ibadah, pendidikan keislaman, serta kegiatan sosial umat.
                     </p>
                     <br>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est modi maiores sapiente nisi,
-                        pariatur
-                        minima aliquam omnis. Delectus facere doloremque inventore saepe corrupti est dolorum veniam
-                        nulla!
-                        Nam nostrum numquam id quos neque, aliquam porro aliquid deleniti non. Nulla delectus explicabo
-                        exercitationem expedita dicta ratione accusamus excepturi?
+                        Melalui partisipasi dan dukungan kaum muslimin dan muslimat, pembangunan masjid ini terus
+                        berjalan secara bertahap. Setiap donasi, baik berupa uang maupun material, menjadi bagian
+                        dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
                     </p>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-green-500 sticky top-4">
-                <h3 class="text-xl font-bold text-green-800 mb-6 text-left">Gallery Kegiatan</h3>
+                <h3 class="text-xl font-bold text-green-800 mb-6 text-center">Masjid An-Nurul Fajri</h3>
                 <div class="space-y-4">
-                    <img src="https://images.unsplash.com/photo-1512970648279-ff3398568f77?q=80&w=1176&auto=format&fit=crop"
-                        alt="Gallery 1" class="rounded-xl w-full h-44 object-cover">
-                    <img src="https://images.unsplash.com/photo-1512970648279-ff3398568f77?q=80&w=1176&auto=format&fit=crop"
-                        alt="Gallery 2" class="rounded-xl w-full h-44 object-cover">
-                    <img src="https://images.unsplash.com/photo-1512970648279-ff3398568f77?q=80&w=1176&auto=format&fit=crop"
-                        alt="Gallery 3" class="rounded-xl w-full h-44 object-cover">
+                    <img src="{{ asset('img/img1.PNG') }}"class="rounded-xl w-full h-50 object-cover">
+                    <img src="{{ asset('img/img2.PNG') }}"class="rounded-xl w-full h-50 object-cover">
+                    <img src="{{ asset('img/img3.PNG') }}"class="rounded-xl w-full h-50 object-cover">
                 </div>
             </div>
-
         </div>
-    </main>
 
+        <!-- Card Alamat Masjid -->
+        <section class="px-4 pb-20">
+            <div class="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
+                <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
+                    Lokasi & Alamat Masjid
+                </h2>
+
+                <div class="text-center text-gray-700 space-y-2">
+                    <p class="font-semibold">Masjid An-Nurul Fajri</p>
+                    <p>Jl. Contoh Alamat No. 123</p>
+                    <p>Desa Sukamaju, Kecamatan Sejahtera</p>
+                    <p>Kabupaten Bandung, Jawa Barat</p>
+                </div>
+
+                <div class="mt-6 flex justify-center">
+                    <a href="https://maps.google.com"
+                    target="_blank"
+                    class="inline-block bg-green-600 text-white px-6 py-3 rounded-full font-bold hover:bg-green-700 transition">
+                        Lihat di Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 </x-layout>

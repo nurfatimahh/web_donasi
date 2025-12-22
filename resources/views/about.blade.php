@@ -13,29 +13,34 @@
         <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border-t-4 border-amber-500">
 
             <div class="p-8 md:p-12 border-b border-gray-100">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-10 items-center">
 
                     <div class="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-80">
-                        <img src="" alt="gambarnya"
+                        <img src="" alt=""
+                            class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-green-900/20"></div>
+                    </div>
+                        <div class="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-80">
+                        <img src="" alt=""
                             class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-green-900/20"></div>
                     </div>
 
-                    <div>
+                    <div class="container mx-auto flex justify-center">
                         <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3>
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Majelis Ta’lim Riyadhul Badi’ah</h2>
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Masjid An-Nurul Fajri</h2>
-                        <p class="text-gray-600 leading-relaxed mb-4">
-                            Dalam menyikapi perkembangan zaman yang begitu pesat, dibutuhkan lembaga
-                            pendidikan (dalam hal ini Agama Islam) yang mampu menjadi tempat yang nyaman dan aman dalam proses belajar mengajarnya dengan segala kelengkapan sarana
-                            dan prasarananya yang mendukung agar bisa memaksimalkan potensi-potensi Santriyin/Santriyat. Sehingga apa yang sudah diusahakan bisa menghasilkan
-                            generasi-generasi harapan kita semua. Majelis Ta'lim Riyadhul Badi'ah merupakan lembaga pendidikan yang berbasis salafi yang berpedoman pada Pancasila dan Undang-undang Dasar 1945.
-                        </p>
-                        <p class="text-gray-600 leading-relaxed">
-                            Majelis Ta’lim Riyadhul Badi’ah bertujuan sebagai sarana ibadah untuk mendekatkan diri kepada Allah SWT serta meningkatkan keimanan dan ketakwaan. Selain itu,
-                            majelis ini menjadi wadah syiar dakwah dan penguatan ukhuwah Islamiyah berlandaskan Ahlussunnah wal Jama’ah, membina pemahaman aqidah melalui pengajian rutin,
-                            serta mendidik generasi muda agar berakhlakul karimah dan berprestasi melalui pendidikan Al-Qur’an. Majelis ini juga berperan mempererat persatuan dan mencetak
-                            generasi unggul yang siap bersosialisasi dan berkontribusi positif di masyarakat.
+                        <p class="text-gray-600 leading-relaxed"> 
+                            Dalam menghadapi perkembangan zaman yang semakin pesat, 
+                            diperlukan lembaga pendidikan Islam yang mampu menjadi tempat belajar yang nyaman dan aman,
+                            didukung sarana dan prasarana yang memadai untuk mengembangkan potensi santriwan dan santriwati 
+                            secara optimal. Majelis Ta’lim Riyadhul Badi’ah hadir sebagai lembaga pendidikan berbasis salafi 
+                            yang berpedoman pada Pancasila dan Undang-Undang Dasar 1945.
+                            Majelis Ta’lim Riyadhul Badi’ah berfungsi sebagai sarana ibadah untuk mendekatkan diri kepada Allah SWT 
+                            serta meningkatkan keimanan dan ketakwaan. Selain sebagai wadah syiar dakwah dan penguatan ukhuwah Islamiyah 
+                            berlandaskan Ahlussunnah wal Jama’ah, majelis ini juga membina aqidah melalui pengajian rutin, mendidik generasi 
+                            muda agar berakhlakul karimah dan berprestasi melalui pendidikan Al-Qur’an, serta membentuk generasi unggul yang siap 
+                            berkontribusi positif di masyarakat.
                         </p>
                     </div>
                 </div>
