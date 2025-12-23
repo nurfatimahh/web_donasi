@@ -15,6 +15,9 @@
             <div class="p-8 md:p-12 border-b border-gray-100">
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-10 items-center">
 
+                    <div class="flex grid grid-cols-2 gap-5">
+
+                  
                     <div class="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-80">
                         <img src="" alt=""
                             class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
@@ -25,12 +28,13 @@
                             class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-green-900/20"></div>
                     </div>
+                      </div>
 
-                    <div class="container mx-auto flex justify-center">
-                        <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Majelis Ta’lim Riyadhul Badi’ah</h2>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Masjid An-Nurul Fajri</h2>
-                        <p class="text-gray-600 leading-relaxed"> 
+                    <div class="container mx-auto flex flex-col justify-center">
+                        {{-- <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3> --}}
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Majelis Ta’lim Riyadhul Badi’ah Masjid An-Nurul Fajri</h2>
+                        
+                        <p class="text-gray-600 leading-relaxed text-center"> 
                             Dalam menghadapi perkembangan zaman yang semakin pesat, 
                             diperlukan lembaga pendidikan Islam yang mampu menjadi tempat belajar yang nyaman dan aman,
                             didukung sarana dan prasarana yang memadai untuk mengembangkan potensi santriwan dan santriwati 
