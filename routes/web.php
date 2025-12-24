@@ -10,7 +10,12 @@ use App\Http\Controllers\DonationController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $programs = \App\Models\Program::latest()->get();
+    // Ambil data kebutuhan untuk isi dropdown di modal donasi
+    $needs = \App\Models\Need::all();
+
+    return view('welcome', compact('programs', 'needs'));
+
 });
 
 // Route untuk login - middleware guest (hanya untuk yang belum login)
@@ -42,6 +47,10 @@ Route::get('/donasi', function () {
     return view('donasi');
 });
 
+// Di dalam routes/web.php
+Route::get('/admin/donations', function () {
+    return view('admin.donations.index'); // Nama file blade kamu
+})->name('admin.donations.index');
 
 // Dashboard & backend CRUD - hanya untuk user yang sudah login
 Route::middleware('auth')->group(function () {
@@ -65,19 +74,21 @@ Route::middleware('auth')->group(function () {
             'destroy',
         ]);
 
-        // (Nanti bisa ditambahkan resources lain seperti needs & donations versi admin)
+        Route::resource('needs', NeedController::class)->only([
+            'index',
+            'create',
+            'store',
+            'edit',
+            'update',
+            'destroy',
+        ]);
     });
 
-    // Backend CRUD umum (tanpa prefix admin) - opsional jika masih dipakai
-    Route::resource('needs', NeedController::class)->only([
-        'index',
-        'create',
-        'store',
-    ]);
 
-    Route::resource('donations', DonationController::class)->only([
-        'index',
-        'create',
-        'store',
-    ]);
+
+    // Route::resource('donations', DonationController::class)->only([
+    //     'index',
+    //     'create',
+    //     'store',
+    // ]);
 });
