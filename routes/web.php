@@ -8,6 +8,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\Admin\ProfileController;
 
 
 Route::get('/', function () {
@@ -96,4 +97,10 @@ Route::middleware('auth')->group(function () {
     //     'create',
     //     'store',
     // ]);
+});
+
+
+//halaman profile 
+Route::get('/admin/profile', function () {
+    return view('admin.profile');
 });
