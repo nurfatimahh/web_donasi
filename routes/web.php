@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\GoogleAuthController;
 
 
 Route::get('/', function () {
@@ -51,6 +52,10 @@ Route::get('/donasi', function () {
 Route::get('/admin/donations', function () {
     return view('admin.donations.index'); // Nama file blade kamu
 })->name('admin.donations.index');
+
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
+
 
 // Dashboard & backend CRUD - hanya untuk user yang sudah login
 Route::middleware('auth')->group(function () {

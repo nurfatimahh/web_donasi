@@ -3,7 +3,7 @@
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <div class="flex items-center">
             <a href="/">
-                <span class="text-2xl font-bold tracking-wide">DonasiKita</span>
+                <span class="text-2xl font-bold tracking-wide">MTRibad</span>
             </a>
         </div>
 
