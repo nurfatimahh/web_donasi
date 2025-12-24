@@ -16,7 +16,7 @@ class NeedController extends Controller
     $needs = Need::latest()->paginate(10);
 
     // Frontend bisa membuat view 'needs.index' sendiri.
-    return view('needs.index', compact('needs'));
+    return view('admin.needs.index', compact('needs'));
   }
 
   /**
@@ -24,7 +24,7 @@ class NeedController extends Controller
    */
   public function create()
   {
-    return view('needs.create');
+    return view('admin.needs.create');
   }
 
   /**
@@ -47,7 +47,7 @@ class NeedController extends Controller
     // tes komentar
     Need::create($validated);
 
-    return redirect()->route('needs.index')
+    return redirect()->route('admin.needs.index')
       ->with('success', 'Kebutuhan berhasil dibuat.');
   }
 
@@ -56,7 +56,7 @@ class NeedController extends Controller
    */
   public function edit(Need $need)
   {
-    return view('needs.edit', compact('need'));
+    return view('admin.needs.edit', compact('need'));
   }
   /**
    * UPDATE: simpan perubahan data kebutuhan.
@@ -72,7 +72,7 @@ class NeedController extends Controller
 
     $need->update($validated);
 
-    return redirect()->route('needs.index')
+    return redirect()->route('admin.needs.index')
       ->with('success', 'Kebutuhan berhasil diperbarui.');
   }
 
@@ -83,7 +83,7 @@ class NeedController extends Controller
   {
     $need->delete();  
 
-    return redirect()->route('needs.index')
+    return redirect()->route('admin.needs.index')
       ->with('success', 'Kebutuhan berhasil dihapus.');
   }
 
