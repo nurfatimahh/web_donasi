@@ -17,18 +17,17 @@
 
                     <div class="flex grid grid-cols-2 gap-5">
 
-                  
                     <div class="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-80">
-                        <img src="" alt=""
+                        <img src="{{ asset('img/img4.JPG') }}"
                             class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-green-900/20"></div>
                     </div>
                         <div class="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-80">
-                        <img src="" alt=""
+                        <img src="{{ asset('img/img5.JPG') }}"
                             class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-green-900/20"></div>
                     </div>
-                      </div>
+                </div>
 
                     <div class="container mx-auto flex flex-col justify-center">
                         {{-- <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3> --}}
@@ -122,7 +121,7 @@
                     <div class="text-center group">
                         <div
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
-                            <img src="" alt="Ketua" class="w-full h-full object-cover">
+                            <img src="{{ asset('img/img6.PNG') }}" alt="Ketua" class="w-full h-full object-cover">
                         </div>
                         <h4 class="font-bold text-lg text-gray-800">nama</h4>
                         <span class="text-sm text-amber-600 font-semibold bg-amber-50 px-3 py-1 rounded-full">Ketua
@@ -132,7 +131,7 @@
                     <div class="text-center group">
                         <div
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
-                            <img src="" alt="Bendahara" class="w-full h-full object-cover">
+                            <img src="{{ asset('img/img6.PNG') }}" alt="Bendahara" class="w-full h-full object-cover">
                         </div>
                         <h4 class="font-bold text-lg text-gray-800">nama</h4>
                         <span
@@ -142,7 +141,7 @@
                     <div class="text-center group">
                         <div
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
-                            <img src="" alt="Relawan" class="w-full h-full object-cover">
+                            <img src="{{ asset('img/img6.PNG') }}" alt="Relawan" class="w-full h-full object-cover">
                         </div>
                         <h4 class="font-bold text-lg text-gray-800">nama</h4>
                         <span class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Koord.
