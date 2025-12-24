@@ -87,13 +87,15 @@ Route::middleware('auth')->group(function () {
             'update',
             'destroy',
         ]);
+
+        Route::resource('donations', DonationController::class)->only([
+            'index',
+            'create',
+            'store',
+        ]);
     });
 
 
 
-    // Route::resource('donations', DonationController::class)->only([
-    //     'index',
-    //     'create',
-    //     'store',
-    // ]);
+
 });

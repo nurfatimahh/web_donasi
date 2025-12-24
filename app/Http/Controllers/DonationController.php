@@ -23,7 +23,7 @@ class DonationController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('donations.index', compact('donations'));
+        return view('admin.donations.index', compact('donations'));
     }
 
     /**
@@ -35,7 +35,7 @@ class DonationController extends Controller
         // Ambil daftar kebutuhan untuk donasi barang
         $needs = Need::orderBy('nama_barang')->get();
 
-        return view('donations.create', compact('needs'));
+        return view('admin.donations.create', compact('needs'));
     }
 
     /**
@@ -74,7 +74,7 @@ class DonationController extends Controller
 
         Donation::create($validated);
 
-        return redirect()->route('donations.index')
+        return redirect()->route('admin.donations.index')
             ->with('success', 'Donasi berhasil dicatat.');
     }
 
@@ -86,7 +86,7 @@ class DonationController extends Controller
     {
         $needs = Need::orderBy('nama_barang')->get();
 
-        return view('donations.edit', compact('donation', 'needs'));
+        return view('admin.donations.edit', compact('donation', 'needs'));
     }
 
     /**
@@ -122,7 +122,7 @@ class DonationController extends Controller
 
         $donation->update($validated);
 
-        return redirect()->route('donations.index')
+        return redirect()->route('admin.donations.index')
             ->with('success', 'Donasi berhasil diperbarui.');
     }
 
@@ -134,7 +134,7 @@ class DonationController extends Controller
     {
         $donation->delete();
 
-        return redirect()->route('donations.index')
+        return redirect()->route('admin.donations.index')
             ->with('success', 'Donasi berhasil dihapus.');
     }
 }

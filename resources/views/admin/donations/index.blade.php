@@ -1,49 +1,17 @@
-@php
-    // data dummy sementara
-    if (!isset($donations)) {
-        $donations = collect([
-            (object) ['id' => 1, 'nama_donatur' => 'Rizky Pratama', 'jenis_donasi' => 'uang', 'nominal' => 250000, 'jumlah_barang' => 0, 'status' => 'pending', 'created_at' => now(), 'need' => (object) ['nama_kebutuhan' => 'Semen']],
-            (object) ['id' => 2, 'nama_donatur' => 'Siti Aminah', 'jenis_donasi' => 'barang', 'nominal' => 0, 'jumlah_barang' => 50, 'status' => 'sukses', 'created_at' => now()->subDays(1), 'need' => (object) ['nama_kebutuhan' => 'Batu Bata']],
-            (object) ['id' => 3, 'nama_donatur' => 'Budi Doremi', 'jenis_donasi' => 'uang', 'nominal' => 1200000, 'jumlah_barang' => 0, 'status' => 'sukses', 'created_at' => now()->subDays(2), 'need' => (object) ['nama_kebutuhan' => 'Pasir']],
-            (object) ['id' => 4, 'nama_donatur' => 'Haji Lulung', 'jenis_donasi' => 'barang', 'nominal' => 0, 'jumlah_barang' => 100, 'status' => 'sukses', 'created_at' => now()->subHours(5), 'need' => (object) ['nama_kebutuhan' => 'Kayu']],
-        ]);
-    }
-
-    // logika filter dan sortir
-    if (request('type')) {
-        $donations = $donations->where('jenis_donasi', request('type'));
-    }
-    if (request('status')) {
-        $donations = $donations->where('status', request('status'));
-    }
-
-    // logika sortir berdasarkan nilai tertinggi
-    if (request('sort') == 'highest') {
-        $donations = $donations->sortByDesc(function ($item) {
-            return $item->jenis_donasi == 'uang' ? $item->nominal : $item->jumlah_barang;
-        });
-    }
-
-    // --- PERHITUNGAN STATISTIK (MENGGUNAKAN SUM) ---
-    $totalUang = $donations->where('status', 'sukses')->where('jenis_donasi', 'uang')->sum('nominal');
-    $totalBarang = $donations->where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
-    $pendingCount = $donations->where('status', 'pending')->count();
-@endphp
-
 <x-admin-layout pageTitle="Manajemen Donasi">
-
+    <!-- masi statis -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm border-l-4 border-l-emerald-500">
-            <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Dana (SUM)</p>
-            <h3 class="text-2xl font-black text-emerald-600">Rp {{ number_format($totalUang, 0, ',', '.') }}</h3>
+            <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Dana </p>
+            <h3 class="text-2xl font-black text-emerald-600">Rp tes</h3>
         </div>
         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm border-l-4 border-l-blue-500">
             <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Barang (SUM)</p>
-            <h3 class="text-2xl font-black text-blue-600">{{ $totalBarang }} Unit</h3>
+            <h3 class="text-2xl font-black text-blue-600">sekian Unit</h3>
         </div>
         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm border-l-4 border-l-amber-500">
             <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Perlu Verifikasi</p>
-            <h3 class="text-2xl font-black text-amber-600">{{ $pendingCount }} Transaksi</h3>
+            <h3 class="text-2xl font-black text-amber-600">sekian Transaksi</h3>
         </div>
     </div>
 

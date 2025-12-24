@@ -38,8 +38,8 @@
             <thead>
                 <tr class="bg-slate-50 border-b border-slate-100">
                     <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider">Nama Barang</th>
-                    <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center"
-                        style="width: 300px">Progress</th>
+                    <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center">
+                        Jumlah Terkumpul / Target</th>
                     <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider">Satuan</th>
                     <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center">Aksi
                     </th>
@@ -47,42 +47,54 @@
             </thead>
             <tbody class="divide-y divide-slate-50">
                 @forelse($needs as $n)
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-semibold text-slate-800">{{ $n->nama_barang }}</td>
-                                    <td class="px-6 py-4">
-                                        <!-- function buat tes2 sementara disini  //blm fix dipake-->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-slate-800">{{ $n->nama_barang }}</div>
+                        </td>
 
+                        <td class="px-6 py-4 text-center">
+                            <div
+                                class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+                                <span
+                                    class="text-emerald-600 font-bold">{{ number_format($n->jumlah_terkumpul, 0, ',', '.') }}</span>
+                                <span class="mx-1.5 text-slate-400">/</span>
+                                <span>{{ number_format($n->target_jumlah, 0, ',', '.') }}</span>
+                            </div>
+                        </td>
 
-                                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <span
-                                                class="text-[10px] font-black {{ $displayPercent > 55 ? 'text-white' : 'text-slate-700' }}">
-                                                {{ $n->jumlah_terkumpul }} / {{ $n->target_jumlah }} {{ $n->satuan }}
-                                            </span>
-                                        </div>
-                    </div>
-                    </td>
-                    <td class="px-6 py-4 text-slate-500 font-medium">{{ $n->satuan }}</td>
-                    <td class="px-6 py-4 text-center space-x-4">
-                        <button onclick='openModal("modalNeed", "edit", @json($n))'
-                            class="text-blue-600 font-bold hover:underline hover:text-blue-700 transition-colors">Edit</button>
+                        <td class="px-6 py-4">
+                            <span class="text-slate-500 font-medium">{{ $n->satuan }}</span>
+                        </td>
 
-                        <form action="{{ route('admin.needs.destroy', $n->id) }}" method="POST" class="inline">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="text-red-500 font-bold hover:underline hover:text-red-600 transition-colors"
-                                onclick="return confirm('Hapus kebutuhan ini?')">Hapus</button>
-                        </form>
-                    </td>
+                        <td class="px-6 py-4 text-center space-x-3">
+                            {{-- Tombol Edit --}}
+                            <button onclick='openModal("modalNeed", "edit", @json($n))'
+                                class="text-blue-600 font-bold hover:underline hover:text-blue-700 transition-colors">
+                                Edit
+                            </button>
+
+                            {{-- Tombol Hapus --}}
+                            <form action="{{ route('admin.needs.destroy', $n->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-red-500 font-bold hover:underline hover:text-red-600 transition-colors"
+                                    onclick="return confirm('Hapus kebutuhan ini?')">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @empty
-        <tr>
-            <td colspan="4" class="px-6 py-12 text-center">
-                <div class="text-slate-300 text-4xl mb-3">📦</div>
-                <p class="text-slate-500 font-medium">Data kebutuhan tidak ditemukan.</p>
-            </td>
-        </tr>
-    @endforelse
-    </tbody>
-    </table>
+                    <tr>
+                        <td colspan="4" class="px-6 py-12 text-center">
+                            <div class="text-slate-300 text-4xl mb-3">📦</div>
+                            <p class="text-slate-500 font-medium">Data kebutuhan tidak ditemukan.</p>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
     <!-- form tambah edit -->
     <div id="modalNeed"
