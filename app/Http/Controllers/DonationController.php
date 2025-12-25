@@ -41,7 +41,6 @@ class DonationController extends Controller
         $donations = Donation::with(['user', 'need'])
             ->latest()
             ->paginate(10);
-
         return view('admin.donations.index', compact(
             'donations',
             'totalUang',
@@ -99,6 +98,7 @@ class DonationController extends Controller
         // 2. Simpan ke tabel Donations
         // $donation = \App\Models\Donation::create($validated);
 
+
         // 3. Update tabel Needs (Store ke Need)
         if ($validated['jenis_donasi'] === 'barang' && $request->need_id) {
             $need = \App\Models\Need::find($request->need_id);
@@ -106,6 +106,7 @@ class DonationController extends Controller
         }
 
         return redirect()->back()->with('success', 'Terima kasih, donasi berhasil dicatat!');
+
     }
 
     /**
@@ -152,7 +153,8 @@ class DonationController extends Controller
 
         $donation->update($validated);
 
-        return redirect()->route('admin.donations.index')
+
+        return redirect()->route(view('admin.donations.index'))
             ->with('success', 'Donasi berhasil diperbarui.');
     }
 
@@ -184,7 +186,7 @@ class DonationController extends Controller
         $totalAmount = $donations->where('jenis_donasi', 'uang')->sum('nominal');
 
         $mpdf = new \Mpdf\Mpdf();
-        
+
         // Pastikan path view benar: admin/donations/donation.blade.php
         $html = view('admin.donations.donation', compact('donations', 'date', 'totalAmount'))->render();
 
