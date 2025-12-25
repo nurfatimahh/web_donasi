@@ -112,3 +112,6 @@ Route::get('/admin/profile', function () {
 //pdf reporting
 Route::get('/admin/donations', [DonationController::class, 'index']);
 Route::get('/admin/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
+
+//Detail Program 
+Route::get('/program', [ProgramController::class, 'publicIndex']);
