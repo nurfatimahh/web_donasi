@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Need;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 /**
  * Controller untuk mengelola DATA DONASI
@@ -165,4 +167,29 @@ class DonationController extends Controller
         return redirect()->route('admin.donations.index')
             ->with('success', 'Donasi berhasil dihapus.');
     }
+
+    /**
+     * pdf reporting
+     * Generate PDF report of donations
+     */
+    public function view_pdf()
+    {
+        // Mengambil semua data (tanpa pagination agar masuk semua ke PDF)
+        $donations = Donation::with(['user', 'need'])->latest()->get();
+
+        // Membuat variabel tanggal
+        $date = \Carbon\Carbon::now()->format('d/m/Y');
+
+        // Menghitung total donasi uang
+        $totalAmount = $donations->where('jenis_donasi', 'uang')->sum('nominal');
+
+        $mpdf = new \Mpdf\Mpdf();
+        
+        // Pastikan path view benar: admin/donations/donation.blade.php
+        $html = view('admin.donations.donation', compact('donations', 'date', 'totalAmount'))->render();
+
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output('Laporan-Donasi.pdf', 'I');
+    }
+
 }

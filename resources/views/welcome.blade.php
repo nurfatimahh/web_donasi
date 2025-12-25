@@ -75,13 +75,14 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div class="md:col-span-2 space-y-6">
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-left">
-                        Pembangunan Masjid
-                    </h2>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Pembangunan Masjid An-Nurul Fajri merupakan ikhtiar bersama dalam menghadirkan sarana ibadah
-                        yang layak, nyaman, dan penuh keberkahan bagi masyarakat. Masjid ini diharapkan menjadi pusat
-                        ibadah, pendidikan keislaman, serta kegiatan sosial umat.
+                        Majelis Ta'lim Riyadhul Badi'ah yang menaungi pembangunan Masjid
+                        An-Nurul Fajri merupakan lembaga pendidikan swadaya yang berdiri
+                        pada tanggal 05 Mei 2018. Disebuah rumah kosong milik salah seorang
+                        warga Kp. Manglayang RW 03 Desa Cihanjuang Rahayu, dan Gedung
+                        pertama didirikan, kemudian diresmikan pada tanggal 15 Maret 2020.
+                        Majelis ini sebagai wadah dan menaungi para Santriyin/Santriyat dalam
+                        menimba ilmu Agama Islam.
                     </p>
                     <br>
                     <p class="text-gray-600 leading-relaxed text-left">
@@ -122,30 +123,7 @@
                         dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
                     </p>
                 </div>
-
-                <!-- Card Alamat Masjid -->
-                {{-- <section class="pb-20">
-                    <div class="w-full mx-auto bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
-                        <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
-                            Lokasi & Alamat Masjid
-                        </h2>
-
-                        <div class="text-center text-gray-700 space-y-2">
-                            <p class="font-semibold">Masjid An-Nurul Fajri</p>
-                            <p>Jl. Contoh Alamat No. 123</p>
-                            <p>Desa Sukamaju, Kecamatan Sejahtera</p>
-                            <p>Kabupaten Bandung, Jawa Barat</p>
-                        </div>
-
-                        <div class="mt-6 flex justify-center">
-                            <a href="https://maps.google.com" target="_blank"
-                                class="inline-block bg-green-600 text-white px-6 py-3 rounded-full font-bold hover:bg-green-700 transition">
-                                Lihat di Google Maps
-                            </a>
-                        </div>
-                    </div>
-                </section> --}}
-
+     
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-green-500 sticky top-4">
