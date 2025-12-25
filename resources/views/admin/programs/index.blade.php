@@ -1,17 +1,4 @@
 <x-admin-layout pageTitle="Kelola Program Donasi">
-
-    @if(session('success'))
-        <div id="alert"
-            class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 mb-6 rounded shadow-sm flex justify-between items-center">
-            <div class="flex items-center">
-                <span class="mr-2">✅</span>
-                <span class="font-medium">{{ session('success') }}</span>
-            </div>
-            <button onclick="this.parentElement.remove()"
-                class="text-emerald-500 hover:text-emerald-700 font-bold text-xl">&times;</button>
-        </div>
-    @endif
-
     <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <form action="{{ url()->current() }}" method="GET" class="w-full md:w-1/3 relative group">
             <div class="relative flex-1 min-w-[200px] group">
@@ -27,13 +14,14 @@
             </div>
         </form>
 
-        <button onclick="openModal('modalProgram', 'add')"
+        <button onclick="openModalProgram('modalProgram', 'add')"
             class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-emerald-100 hover:bg-emerald-500 hover:-translate-y-0.5 transition-all active:scale-95">
             + Tambah Program
         </button>
     </div>
 
     <div class="bg-white overflow-hidden border border-slate-100 rounded-2xl shadow-sm">
+
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="bg-slate-50 border-b border-slate-100">
@@ -63,13 +51,16 @@
                         <button class="text-blue-600 font-bold hover:underline hover:text-blue-700 transition-colors">
                             <a href="">Lihat</a></button>
 
-                        <button onclick='openModal("modalProgram", "edit", @json($p))'
+                        <button onclick='openModalProgram("modalProgram", "edit", @json($p))'
                             class="text-blue-600 font-bold hover:underline hover:text-blue-700 transition-colors">Edit</button>
 
                         <form action="/admin/programs/{{ $p->id }}" method="POST" class="inline">
-                            @csrf @method('DELETE')
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" class="text-red-500 font-bold hover:underline hover:text-red-600 transition-colors"
-                                onclick="return confirm('Hapus program ini?')">Hapus</button>
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus program ini?')">
+                                Hapus
+                            </button>
                         </form>
                     </td>
                     </tr>
@@ -123,13 +114,24 @@
                             Program</label>
                         <div class="flex items-center justify-center w-full">
                             <label
-                                class="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                class="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors relative overflow-hidden">
+
+                                <div id="preview-container" class="absolute inset-0 hidden bg-white">
+                                    <img id="img-preview" class="w-full h-full object-cover">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 p-1 text-center">
+                                        <p id="file-name" class="text-[10px] text-white truncate px-2"></p>
+                                    </div>
+                                </div>
+
+                                <div id="placeholder-content"
+                                    class="flex flex-col items-center justify-center pt-5 pb-6">
                                     <p class="text-xs text-slate-500"><span class="font-bold">Klik untuk upload</span>
                                     </p>
                                     <p class="text-[10px] text-slate-400 mt-1 uppercase">JPG, PNG, WEBP (Max. 2MB)</p>
                                 </div>
-                                <input type="file" name="gambar" id="gambar" class="hidden" accept="image/*">
+
+                                <input type="file" name="gambar" id="gambar" class="hidden" accept="image/*"
+                                    onchange="previewImage(this)">
                             </label>
                         </div>
                     </div>
@@ -164,34 +166,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function openModal(id, mode, data = null) {
-            const modal = document.getElementById(id);
-            const form = document.getElementById('formProgram');
-            const method = document.getElementById('formMethod');
-            const title = document.getElementById('modalTitle');
-
-            if (mode === 'edit') {
-                title.innerText = 'Edit Program';
-                form.action = '/admin/programs/' + data.id;
-                method.value = 'PUT';
-                document.getElementById('nama_program').value = data.nama_program;
-                document.getElementById('deskripsi').value = data.deskripsi;
-                document.getElementById('tanggal_mulai').value = data.tanggal_mulai;
-                document.getElementById('tanggal_selesai').value = data.tanggal_selesai;
-                document.getElementById('gambar').value = "";
-            } else {
-                title.innerText = 'Tambah Program';
-                form.action = '/admin/programs';
-                method.value = 'POST';
-                form.reset();
-            }
-            modal.classList.remove('hidden');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-    </script>
 </x-admin-layout>

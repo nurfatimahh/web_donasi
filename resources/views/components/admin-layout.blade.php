@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- Alpine.js untuk fungsi Dropdown --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite(['resources/js/admin.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -116,26 +116,27 @@
             {{-- CONTENT AREA --}}
             <div class="p-8 flex-1">
                 {{-- Alert Sukses --}}
+
+
                 @if(session('success'))
-                    <div
-                        class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 px-4 py-3 rounded-xl mb-6 flex justify-between items-center shadow-sm">
-                        <span class="text-sm font-medium">✅ {{ session('success') }}</span>
+                    <div id="alert"
+                        class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 mb-6 rounded shadow-sm flex justify-between items-center">
+                        <div class="flex items-center">
+                            <span class="font-medium">{{ session('success') }}</span>
+                        </div>
                         <button onclick="this.parentElement.remove()"
                             class="text-emerald-500 hover:text-emerald-700 font-bold text-xl">&times;</button>
                     </div>
                 @endif
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden min-h-[500px] shadow-sm">
-                    <div class="p-8">
-                        {{ $slot }}
-                    </div>
-                </div>
+                {{ $slot }}
             </div>
+    </div>
+    </div>
 
-            <footer class="p-8 pt-0 text-center text-slate-400 text-[10px] font-medium uppercase tracking-[0.2em]">
-                &copy; 2025 DonasiKita - Administrasi
-            </footer>
-        </main>
+    <footer class="p-8 pt-0 text-center text-slate-400 text-[10px] font-medium uppercase tracking-[0.2em]">
+        &copy; 2025 DonasiKita - Administrasi
+    </footer>
+    </main>
     </div>
 </body>
 
