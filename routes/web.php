@@ -16,7 +16,7 @@ Route::get('/', function () {
     // Ambil data kebutuhan untuk isi dropdown di modal donasi
     $needs = \App\Models\Need::all();
 
-    return view('welcome', compact('needs', 'programs', 'ayah'));
+    return view('welcome', compact('needs', 'programs'));
 
 });
 
@@ -34,6 +34,7 @@ Route::post('/register', [RegisterController::class, 'register'])->middleware('g
 Route::get('/contact', function () {
     return view('contact');
 });
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -45,9 +46,7 @@ Route::get('/program', function () {
     return view('program', compact('programs'));
 });
 
-Route::get('/donasi', function () {
-    return view('donasi');
-});
+Route::get('/donasi', [DonationController::class, 'create'])->name('donasi.create');
 
 // Di dalam routes/web.php
 Route::get('/admin/donations', function () {
