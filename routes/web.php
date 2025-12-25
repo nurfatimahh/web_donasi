@@ -104,3 +104,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/admin/profile', function () {
     return view('admin.profile');
 });
+
+//pdf reporting
+Route::get('/admin/donations', [DonationController::class, 'index']);
+Route::get('/admin/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
