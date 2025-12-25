@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Need;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 /**
  * Controller untuk mengelola DATA DONASI
@@ -40,12 +42,16 @@ class DonationController extends Controller
             ->latest()
             ->paginate(10);
 
+<<<<<<< HEAD
         return view('admin.donations.index', compact(
             'donations',
             'totalUang',
             'totalBarang',
             'pendingCount'
         ));
+=======
+        return view('admin.donations.index', compact('donations'));
+>>>>>>> 60bf5387b5162f7978caa47e3f45654265c74f78
     }
 
     /**
@@ -97,6 +103,7 @@ class DonationController extends Controller
         // 2. Simpan ke tabel Donations
         // $donation = \App\Models\Donation::create($validated);
 
+<<<<<<< HEAD
         // 3. Update tabel Needs (Store ke Need)
         if ($validated['jenis_donasi'] === 'barang' && $request->need_id) {
             $need = \App\Models\Need::find($request->need_id);
@@ -104,6 +111,10 @@ class DonationController extends Controller
         }
 
         return redirect()->back()->with('success', 'Terima kasih, donasi berhasil dicatat!');
+=======
+        return redirect()->route('admin.donations.index')
+            ->with('success', 'Donasi berhasil dicatat.');
+>>>>>>> 60bf5387b5162f7978caa47e3f45654265c74f78
     }
 
     /**
@@ -150,7 +161,11 @@ class DonationController extends Controller
 
         $donation->update($validated);
 
+<<<<<<< HEAD
         return redirect()->route('admin.donations.index')
+=======
+        return redirect()->route(view('admin.donations.index'))
+>>>>>>> 60bf5387b5162f7978caa47e3f45654265c74f78
             ->with('success', 'Donasi berhasil diperbarui.');
     }
 
@@ -162,7 +177,36 @@ class DonationController extends Controller
     {
         $donation->delete();
 
+<<<<<<< HEAD
         return redirect()->route('admin.donations.index')
+=======
+        return redirect()->route(view('admin.donations.index'))
+>>>>>>> 60bf5387b5162f7978caa47e3f45654265c74f78
             ->with('success', 'Donasi berhasil dihapus.');
     }
+
+    /**
+     * pdf reporting
+     * Generate PDF report of donations
+     */
+    public function view_pdf()
+    {
+        // Mengambil semua data (tanpa pagination agar masuk semua ke PDF)
+        $donations = Donation::with(['user', 'need'])->latest()->get();
+
+        // Membuat variabel tanggal
+        $date = \Carbon\Carbon::now()->format('d/m/Y');
+
+        // Menghitung total donasi uang
+        $totalAmount = $donations->where('jenis_donasi', 'uang')->sum('nominal');
+
+        $mpdf = new \Mpdf\Mpdf();
+        
+        // Pastikan path view benar: admin/donations/donation.blade.php
+        $html = view('admin.donations.donation', compact('donations', 'date', 'totalAmount'))->render();
+
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output('Laporan-Donasi.pdf', 'I');
+    }
+
 }
