@@ -15,7 +15,7 @@ Route::get('/', function () {
     // Ambil data kebutuhan untuk isi dropdown di modal donasi
     $needs = \App\Models\Need::all();
 
-    return view('welcome', compact('programs', 'needs'));
+    return view('welcome', compact('needs', 'programs', 'ayah'));
 
 });
 
@@ -50,7 +50,7 @@ Route::get('/donasi', function () {
 
 // Di dalam routes/web.php
 Route::get('/admin/donations', function () {
-    return view('admin.donations.index'); // Nama file blade kamu
+    return view('admin.donations.index');
 })->name('admin.donations.index');
 
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.login');
@@ -62,6 +62,8 @@ Route::middleware('auth')->group(function () {
     // Dashboard utama (bisa diarahkan ke admin layout)
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+
+    Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
 
     // Grup route admin dengan prefix URL /admin dan prefix nama admin.
     Route::prefix('admin')->name('admin.')->group(function () {

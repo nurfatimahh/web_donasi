@@ -17,13 +17,35 @@ class DonationController extends Controller
      * READ
      * Menampilkan daftar seluruh donasi
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 1. Query dasar dengan Eager Loading
+        $query = Donation::with(['user', 'need']);
+
+        // 2. Logika Pencarian & Filter (Pindahkan dari View ke sini)
+        if ($request->search) {
+            $query->where('nama_donatur', 'like', '%' . $request->search . '%');
+        }
+        if ($request->type) {
+            $query->where('jenis_donasi', $request->type);
+        }
+
+        // 3. Hitung Statistik dari Database (BUKAN dari data dummy)
+        $totalUang = Donation::where('status', 'sukses')->where('jenis_donasi', 'uang')->sum('nominal');
+        $totalBarang = Donation::where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
+        $pendingCount = Donation::where('status', 'pending')->count();
+
+        // 4. Ambil data dengan paginasi
         $donations = Donation::with(['user', 'need'])
             ->latest()
             ->paginate(10);
 
-        return view('admin.donations.index', compact('donations'));
+        return view('admin.donations.index', compact(
+            'donations',
+            'totalUang',
+            'totalBarang',
+            'pendingCount'
+        ));
     }
 
     /**
@@ -72,10 +94,16 @@ class DonationController extends Controller
                 $request->file('bukti_transfer')->store('donations', 'public');
         }
 
-        Donation::create($validated);
+        // 2. Simpan ke tabel Donations
+        // $donation = \App\Models\Donation::create($validated);
 
-        return redirect()->route('admin.donations.index')
-            ->with('success', 'Donasi berhasil dicatat.');
+        // 3. Update tabel Needs (Store ke Need)
+        if ($validated['jenis_donasi'] === 'barang' && $request->need_id) {
+            $need = \App\Models\Need::find($request->need_id);
+            $need->increment('jumlah_terkumpul', $request->jumlah_barang);
+        }
+
+        return redirect()->back()->with('success', 'Terima kasih, donasi berhasil dicatat!');
     }
 
     /**
