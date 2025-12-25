@@ -14,17 +14,15 @@
                 Setiap donasi Anda adalah investasi akhirat yang tak ternilai harganya.
             </p>
 
-            <div class="pt-8 md:pt-10 flex justify-center">
+            <div class="pt-10 flex justify-center">
                 @auth
-                    {{-- Tombol jika sudah login --}}
                     <button type="button" onclick="openModalDonasi('modalDonasi')"
-                        class="w-full md:w-fit text-lg md:text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 border-4 border-white cursor-pointer">
+                        class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer">
                         Donasi Sekarang
                     </button>
                 @else
-                    {{-- Tombol jika belum login --}}
                     <a href="{{ route('login') }}"
-                        class="w-full md:w-fit text-lg md:text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 py-4 px-12 rounded-full shadow-xl inline-block text-center border-4 border-white">
+                        class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer inline-block text-center">
                         Donasi Sekarang
                     </a>
                 @endauth
@@ -123,29 +121,6 @@
                         dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
                     </p>
                 </div>
-
-                <!-- Card Alamat Masjid -->
-                {{-- <section class="pb-20">
-                    <div class="w-full mx-auto bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
-                        <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
-                            Lokasi & Alamat Masjid
-                        </h2>
-
-                        <div class="text-center text-gray-700 space-y-2">
-                            <p class="font-semibold">Masjid An-Nurul Fajri</p>
-                            <p>Jl. Contoh Alamat No. 123</p>
-                            <p>Desa Sukamaju, Kecamatan Sejahtera</p>
-                            <p>Kabupaten Bandung, Jawa Barat</p>
-                        </div>
-
-                        <div class="mt-6 flex justify-center">
-                            <a href="https://maps.google.com" target="_blank"
-                                class="inline-block bg-green-600 text-white px-6 py-3 rounded-full font-bold hover:bg-green-700 transition">
-                                Lihat di Google Maps
-                            </a>
-                        </div>
-                    </div>
-                </section> --}}
 
             </div>
 
