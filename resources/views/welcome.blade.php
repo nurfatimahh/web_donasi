@@ -15,10 +15,17 @@
             </p>
 
             <div class="pt-10 flex justify-center">
-                <label for="modal_saklar"
-                    class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer">
-                    Donasi Sekarang
-                </label>
+                @auth
+                    <button type="button" onclick="openModalDonasi('modalDonasi')"
+                        class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer">
+                        Donasi Sekarang
+                    </button>
+                @else
+                    <a href="{{ route('login') }}" 
+                        class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer inline-block text-center">
+                        Donasi Sekarang
+                    </a>
+                @endauth
             </div>
         </div>
     </section>

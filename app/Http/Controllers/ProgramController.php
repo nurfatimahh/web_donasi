@@ -88,5 +88,11 @@ class ProgramController extends Controller
     $program->delete();
     return redirect()->route('admin.programs.index')
       ->with('success', 'Program berhasil dihapus.');
+    }
+
+    public function publicIndex()
+  {
+      $programs = Program::latest()->get();
+      return view('program', compact('programs'));
   }
 }
