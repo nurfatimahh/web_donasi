@@ -114,3 +114,6 @@ Route::get('/admin/donations/pdf', [DonationController::class, 'view_pdf'])->nam
 
 //Detail Program 
 Route::get('/program', [ProgramController::class, 'publicIndex']);
+
+// Show detail program
+Route::get('/admin/programs/{program}', [ProgramController::class, 'show'])->name('admin.programs.show');
