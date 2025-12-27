@@ -1,116 +1,69 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\NeedController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\NeedController;
+use App\Http\Controllers\HomeController;
+
+//Public Routes (Bisa diakses tanpa login)
 
 
-Route::get('/', function () {
-    $programs = \App\Models\Program::latest()->get();
-    // Ambil data kebutuhan untuk isi dropdown di modal donasi
-    $needs = \App\Models\Need::all();
+// Halaman Utama (API Quran/Home) - Dipindah ke sini agar tidak perlu login
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    return view('welcome', compact('needs', 'programs'));
-
-});
-
-// Route untuk login - middleware guest (hanya untuk yang belum login)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
-// Route logout - hanya untuk yang sudah login
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-// Register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
-
+// Halaman Publik Lainnya
 Route::get('/contact', function () {
     return view('contact');
 });
-
 Route::get('/about', function () {
     return view('about');
 });
-
-
-Route::get('/program', function () {
-    // ngambil data program dari database
-    $programs = \App\Models\Program::latest()->get();
-    return view('program', compact('programs'));
+Route::get('/program', [ProgramController::class, 'publicIndex']);
+Route::get('/donasi', function () {
+    return view('donasi');
 });
 
-Route::get('/donasi', [DonationController::class, 'create'])->name('donasi.create');
+// Auth Routes (Guest Middleware)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'register']);
+});
 
-// Di dalam routes/web.php
-Route::get('/admin/donations', function () {
-    return view('admin.donations.index');
-})->name('admin.donations.index');
-
+// Google Auth
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
 
-// Dashboard & backend CRUD - hanya untuk user yang sudah login
-Route::middleware('auth')->group(function () {
-    // Dashboard utama (bisa diarahkan ke admin layout)
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
+//Protected Routes (Hanya untuk user yang sudah login)
 
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
 
-    // Grup route admin dengan prefix URL /admin dan prefix nama admin.
+    // Grup rute admin
     Route::prefix('admin')->name('admin.')->group(function () {
-        // Dashboard admin
-        Route::get('/dashboard', [DashboardController::class, 'index'])
-            ->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Program (CRUD lengkap untuk admin)
-        Route::resource('programs', ProgramController::class)->only([
-            'index',
-            'create',
-            'store',
-            'edit',
-            'update',
-            'destroy',
-        ]);
+        Route::patch('/donations/{donation}/verify', [DonationController::class, 'verify'])->name('donations.verify');
 
-        Route::resource('needs', NeedController::class)->only([
-            'index',
-            'create',
-            'store',
-            'edit',
-            'update',
-            'destroy',
-        ]);
+        Route::resource('programs', ProgramController::class);
+        Route::resource('needs', NeedController::class);
 
-        Route::resource('donations', DonationController::class)->only([
-            'index',
-            'create',
-            'store',
-        ]);
+        // Rute PDF
+        Route::get('/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
+
+        // CRUD Lengkap Donasi Admin
+        Route::resource('donations', DonationController::class);
+
+        Route::patch('/admin/donations/{donation}/reject', [App\Http\Controllers\DonationController::class, 'reject'])
+            ->name('admin.donations.reject');
     });
-
 });
-
-
-//halaman profile 
-Route::get('/admin/profile', function () {
-    return view('admin.profile');
-});
-
-//pdf reporting
-Route::get('/admin/donations', [DonationController::class, 'index']);
-Route::get('/admin/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
-
-//Detail Program 
-Route::get('/program', [ProgramController::class, 'publicIndex']);
-
-// Show detail program
-Route::get('/admin/programs/{program}', [ProgramController::class, 'show'])->name('admin.programs.show');

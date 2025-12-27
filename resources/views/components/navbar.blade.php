@@ -12,40 +12,68 @@
             <a href="/" class="hover:text-emerald-200 transition">Home</a>
             <a href="/about" class="hover:text-emerald-200 transition">Tentang Kami</a>
             <a href="/program" class="hover:text-emerald-200 transition">Program</a>
-            <a href="/donasi" class="hover:text-emerald-200 transition">Donasi</a>
             <a href="/contact" class="hover:text-emerald-200 transition">Kontak</a>
         </nav>
 
         <div class="flex items-center space-x-4 ml-4">
             @auth
-                {{-- Dropdown Profil (Checkbox Hack) --}}
-                <div class="relative">
-                    <input type="checkbox" id="menu_profil" class="peer hidden">
-
-                    <label for="menu_profil"
-                        class="flex items-center gap-2 hover:bg-green-600 p-1 pr-3 rounded-full transition-all cursor-pointer select-none">
+                {{-- Container Utama Profil --}}
+                <div class="relative group">
+                    {{-- Tombol Pemicu (Muncul saat Hover) --}}
+                    <button
+                        class="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/20 transition-all cursor-pointer">
                         <div
-                            class="w-8 h-8 md:w-10 md:h-10 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center text-green-900 font-black text-xs uppercase shadow-sm">
+                            {{ substr(Auth::user()->name, 0, 2) }}
                         </div>
-                        <span class="text-sm font-medium hidden sm:inline">{{ Auth::user()->name }} ▼</span>
-                    </label>
+                        <span class="hidden md:block font-bold text-sm text-white tracking-wide">
+                            {{ Auth::user()->name }}
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-amber-300 transition-transform group-hover:rotate-180" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
 
-                    {{-- Isi Dropdown (Hanya muncul jika checkbox di atas dicentang) --}}
-                    <div class="absolute right-0 mt-2 w-48 bg-white text-slate-700 rounded-xl shadow-xl py-2 z-50 border border-slate-100 
-                                    hidden peer-checked:block animate-in fade-in zoom-in duration-200">
-                        <a href="/admin/profile" class="block px-4 py-2 text-sm hover:bg-slate-50 font-medium">Profil</a>
+                    {{-- Dropdown Menu --}}
+                    <div
+                        class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 py-2 hidden group-hover:block z-50 transform origin-top animate-in fade-in zoom-in duration-200">
+
+                        <div class="px-4 py-3 border-b border-slate-50">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Akun Saya</p>
+                            <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->email }}</p>
+                        </div>
+
+                        <a href="/admin/profile"
+                            class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                            Profil
+                        </a>
+
+                        <!-- <a href="{{ route('dashboard') }}"
+                                                        class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                                                        Dashboard Saya
+                                                    </a> -->
+
                         <div class="border-t border-slate-100 my-1"></div>
-                        <form method="POST" action="{{ route('logout') }}">
+
+                        {{-- Logout Form (Sudah Terintegrasi JS Confirm) --}}
+                        <form id="logout-form" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-bold">Logout</button>
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 font-black transition-colors cursor-pointer">
+                                Logout
+                            </button>
                         </form>
                     </div>
                 </div>
             @else
-                <a href="{{ route('login') }}"
-                    class="hidden md:block text-sm font-bold hover:text-emerald-200 transition">Masuk</a>
+                <a href="{{ route('login') }}" class="hidden md:block text-sm font-bold px-6 py-2 rounded-full border-2 border-white 
+                      bg-white text-emerald-600
+                      transition-all duration-300 ease-in-out
+                      hover:bg-emerald-700 hover:text-white hover:border-emerald-700 hover:scale-105">
+                    Masuk
+                </a>
             @endauth
 
             {{-- Mobile Menu Toggle (Checkbox Hack) --}}
@@ -66,7 +94,6 @@
                         <a href="/" class="block hover:text-emerald-200">Home</a>
                         <a href="/about" class="block hover:text-emerald-200">Tentang Kami</a>
                         <a href="/program" class="block hover:text-emerald-200">Program</a>
-                        <a href="/donasi" class="block hover:text-emerald-200">Donasi</a>
                         @guest
                             <a href="{{ route('login') }}" class="block text-amber-300 border-t border-green-700 pt-4">Masuk
                                 / Daftar</a>

@@ -6,64 +6,48 @@ use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Need;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 
-/**
- * Controller untuk mengelola DATA DONASI
- * (uang & barang)
- */
 class DonationController extends Controller
 {
     /**
-     * READ
      * Menampilkan daftar seluruh donasi
      */
     public function index(Request $request)
     {
-        // 1. Query dasar dengan Eager Loading
         $query = Donation::with(['user', 'need']);
+        $query->when($request->search, function ($q) use ($request) {
+            return $q->where('nama_donatur', 'like', '%' . $request->search . '%');
+        });
+        // Statistik (Hanya menghitung yang SUKSES)
+        $totalAmount = Donation::where('status', 'sukses')
+            ->where('jenis_donasi', 'uang')
+            ->sum('nominal');
 
-        // 2. Logika Pencarian & Filter (Pindahkan dari View ke sini)
-        if ($request->search) {
-            $query->where('nama_donatur', 'like', '%' . $request->search . '%');
-        }
-        if ($request->type) {
-            $query->where('jenis_donasi', $request->type);
-        }
-
-        // 3. Hitung Statistik dari Database (BUKAN dari data dummy)
-        $totalAmount = Donation::where('jenis_donasi', 'uang')->sum('nominal');
-        $totalBarang = Donation::where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
+        // Total Barang yang benar-benar masuk
+        $totalBarang = Donation::where('status', 'sukses')
+            ->where('jenis_donasi', 'barang')
+            ->sum('jumlah_barang');
+        // Menghitung yang masih PENDING
         $pendingCount = Donation::where('status', 'pending')->count();
 
-       
+        // Ambil data terbaru dengan paginasi
+        $donations = Donation::with(['user', 'need'])
+            ->latest()
+            ->paginate(10);
+
         return view('admin.donations.index', compact(
-        'totalAmount', 
-        'totalBarang', 
-        'pendingCount'
+            'donations',
+            'totalAmount',
+            'totalBarang',
+            'pendingCount'
         ));
     }
 
     /**
-     * CREATE
-     * Menampilkan form tambah donasi
-     */
-    public function create()
-    {
-        // Ambil daftar kebutuhan untuk donasi barang
-        $needs = Need::orderBy('nama_barang')->get();
-
-        return view('donasi', compact('needs'));
-    }
-
-    /**
-     * CREATE
-     * Menyimpan data donasi baru ke database
+     * Menyimpan data donasi baru
      */
     public function store(Request $request)
     {
-        // Validasi input form
         $validated = $request->validate([
             'nama_donatur' => ['required', 'string', 'max:255'],
             'jenis_donasi' => ['required', 'in:uang,barang'],
@@ -73,52 +57,54 @@ class DonationController extends Controller
             'bukti_transfer' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        // Ambil user yang sedang login
-        $validated['user_id'] = Auth::id();
+        $validated['user_id'] = \Illuminate\Support\Facades\Auth::id();
 
-        // Logika berdasarkan jenis donasi
+        // SEMUA jenis donasi status awalnya PENDING
+        $validated['status'] = 'pending';
+
         if ($validated['jenis_donasi'] === 'uang') {
-            // Donasi uang tidak punya jumlah barang
             $validated['jumlah_barang'] = null;
         } else {
-            // Donasi barang tidak punya nominal
             $validated['nominal'] = null;
         }
 
-        // Upload bukti transfer jika ada
         if ($request->hasFile('bukti_transfer')) {
-            $validated['bukti_transfer'] =
-                $request->file('bukti_transfer')->store('donations', 'public');
+            $validated['bukti_transfer'] = $request->file('bukti_transfer')->store('donations', 'public');
         }
 
-        // 2. Simpan ke tabel Donations
-        // $donation = \App\Models\Donation::create($validated);
+        \App\Models\Donation::create($validated);
 
-
-        // 3. Update tabel Needs (Store ke Need)
-        if ($validated['jenis_donasi'] === 'barang' && $request->need_id) {
-            $need = \App\Models\Need::find($request->need_id);
-            $need->increment('jumlah_terkumpul', $request->jumlah_barang);
-        }
-
-        return redirect()->back()->with('success', 'Terima kasih, donasi berhasil dicatat!');
-
+        return redirect('/')->with('success', 'Donasi berhasil dikirim dan menunggu verifikasi.');
     }
 
     /**
-     * UPDATE
-     * Menampilkan form edit donasi
+     * Fungsi verifikasi untuk Uang dan Barang
      */
+    public function verify(\App\Models\Donation $donation)
+    {
+        if ($donation->status === 'pending') {
+            $donation->update(['status' => 'sukses']);
+
+            // Jika yang diverifikasi adalah barang, tambah jumlah terkumpul
+            if ($donation->jenis_donasi === 'barang' && $donation->need_id) {
+                $donation->need->increment('jumlah_terkumpul', $donation->jumlah_barang);
+            }
+
+            return redirect()->back()->with('success', 'Donasi berhasil diverifikasi!');
+        }
+
+        return redirect()->back()->with('error', 'Donasi sudah diproses.');
+    }
+
+
     public function edit(Donation $donation)
     {
         $needs = Need::orderBy('nama_barang')->get();
-
         return view('admin.donations.edit', compact('donation', 'needs'));
     }
 
     /**
-     * UPDATE
-     * Menyimpan perubahan data donasi
+     * Menyimpan perubahan (Update)
      */
     public function update(Request $request, Donation $donation)
     {
@@ -128,42 +114,23 @@ class DonationController extends Controller
             'nominal' => ['nullable', 'integer', 'min:1'],
             'need_id' => ['nullable', 'exists:needs,id'],
             'jumlah_barang' => ['nullable', 'integer', 'min:1'],
-            'bukti_transfer' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'status' => ['required', 'in:pending,sukses,ditolak'], // Tambahkan validasi status
         ]);
 
-        // Update user yang melakukan perubahan
-        $validated['user_id'] = Auth::id();
-
-        // Logika jenis donasi
-        if ($validated['jenis_donasi'] === 'uang') {
-            $validated['jumlah_barang'] = null;
-        } else {
-            $validated['nominal'] = null;
-        }
-
-        // Upload ulang bukti transfer jika diganti
         if ($request->hasFile('bukti_transfer')) {
-            $validated['bukti_transfer'] =
-                $request->file('bukti_transfer')->store('donations', 'public');
+            $validated['bukti_transfer'] = $request->file('bukti_transfer')->store('donations', 'public');
         }
 
         $donation->update($validated);
 
-
-        return redirect()->route(view('admin.donations.index'))
-            ->with('success', 'Donasi berhasil diperbarui.');
+        // PERBAIKAN: Gunakan nama rute yang benar
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil diperbarui.');
     }
 
-    /**
-     * DELETE
-     * Menghapus data donasi
-     */
     public function destroy(Donation $donation)
     {
         $donation->delete();
-
-        return redirect()->route('admin.donations.index')
-            ->with('success', 'Donasi berhasil dihapus.');
+        return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil dihapus.');
     }
 
     /**
