@@ -19,9 +19,20 @@ class DonationController extends Controller
             return $q->where('nama_donatur', 'like', '%' . $request->search . '%');
         });
         // Statistik (Hanya menghitung yang SUKSES)
+<<<<<<< HEAD
         $totalAmount = Donation::where('jenis_donasi', 'uang')->sum('nominal');
         $totalBarang = Donation::where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
 
+=======
+        $totalAmount = Donation::where('status', 'sukses')
+            ->where('jenis_donasi', 'uang')
+            ->sum('nominal');
+
+        // Total Barang yang benar-benar masuk
+        $totalBarang = Donation::where('status', 'sukses')
+            ->where('jenis_donasi', 'barang')
+            ->sum('jumlah_barang');
+>>>>>>> d2232b2cff123f83396ff8282b52ecf9514a0448
         // Menghitung yang masih PENDING
         $pendingCount = Donation::where('status', 'pending')->count();
 
@@ -91,6 +102,10 @@ class DonationController extends Controller
         return redirect()->back()->with('error', 'Donasi sudah diproses.');
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2232b2cff123f83396ff8282b52ecf9514a0448
     public function edit(Donation $donation)
     {
         $needs = Need::orderBy('nama_barang')->get();

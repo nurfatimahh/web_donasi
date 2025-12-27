@@ -28,11 +28,13 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-50 border-b border-slate-100">
-                        <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider">Nama Barang</th>
+                        <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider">Nama Barang
+                        </th>
                         <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center">
                             Jumlah Terkumpul / Target</th>
                         <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider">Satuan</th>
-                        <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center">Aksi</th>
+                        <th class="px-6 py-4 text-slate-600 font-bold uppercase text-[11px] tracking-wider text-center">
+                            Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
@@ -43,8 +45,10 @@
                             </td>
 
                             <td class="px-6 py-4 text-center">
-                                <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
-                                    <span class="text-emerald-600 font-bold">{{ number_format($n->jumlah_terkumpul, 0, ',', '.') }}</span>
+                                <div
+                                    class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+                                    <span
+                                        class="text-emerald-600 font-bold">{{ number_format($n->jumlah_terkumpul, 0, ',', '.') }}</span>
                                     <span class="mx-1.5 text-slate-400">/</span>
                                     <span>{{ number_format($n->target_jumlah, 0, ',', '.') }}</span>
                                 </div>
@@ -91,7 +95,8 @@
         class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center z-[999] p-4 transition-all">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-100">
             <div class="p-6 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center">
-                <h3 id="modalTitle" class="text-lg font-black text-slate-800 uppercase tracking-tight">Tambah Kebutuhan</h3>
+                <h3 id="modalTitle" class="text-lg font-black text-slate-800 uppercase tracking-tight">Tambah Kebutuhan
+                </h3>
                 <button onclick="closeModal('modalNeed')"
                     class="text-slate-400 hover:text-slate-600 font-bold text-2xl">&times;</button>
             </div>
@@ -102,7 +107,8 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Nama Barang</label>
+                        <label class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Nama
+                            Barang</label>
                         <input type="text" name="nama_barang" id="nama_barang" placeholder="Contoh: Semen Gresik"
                             class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition-all shadow-sm"
                             required>
@@ -110,22 +116,28 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Target Jumlah</label>
+                            <label
+                                class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Target
+                                Jumlah</label>
                             <input type="number" name="target_jumlah" id="target_jumlah" required min="1"
                                 class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none shadow-sm">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Satuan</label>
+                            <label
+                                class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Satuan</label>
                             <input type="text" name="satuan" id="satuan" placeholder="Zak, Pcs, dll" required
                                 class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none shadow-sm">
                         </div>
                     </div>
 
                     <div id="divTerkumpul" class="hidden">
-                        <label class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Jumlah Terkumpul</label>
+                        <label
+                            class="block text-[11px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Jumlah
+                            Terkumpul</label>
                         <input type="number" name="jumlah_terkumpul" id="jumlah_terkumpul_input" min="0"
                             class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-slate-50 shadow-inner">
-                        <p class="text-[10px] text-slate-400 mt-1.5 italic">*Ubah manual jika ada donasi barang masuk.</p>
+                        <p class="text-[10px] text-slate-400 mt-1.5 italic">*Ubah manual jika ada donasi barang masuk.
+                        </p>
                     </div>
                 </div>
 
@@ -140,51 +152,8 @@
             </form>
         </div>
     </div>
-    
+
     <div class="mt-4">
         {{ $needs->links() }}
     </div>
-
-    {{-- SCRIPT JAVASCRIPT UNTUK MODAL --}}
-    <script>
-        function openModalNeed(modalId, mode, data = null) {
-            const modal = document.getElementById(modalId);
-            const form = document.getElementById('formNeed');
-            const title = document.getElementById('modalTitle');
-            const methodInput = document.getElementById('formMethod');
-            const divTerkumpul = document.getElementById('divTerkumpul');
-
-            modal.classList.remove('hidden');
-
-            if (mode === 'edit' && data) {
-                title.innerText = 'Edit Kebutuhan';
-                form.action = `/admin/needs/${data.id}`;
-                methodInput.value = 'PUT';
-                divTerkumpul.classList.remove('hidden');
-
-                document.getElementById('nama_barang').value = data.nama_barang;
-                document.getElementById('target_jumlah').value = data.target_jumlah;
-                document.getElementById('satuan').value = data.satuan;
-                document.getElementById('jumlah_terkumpul_input').value = data.jumlah_terkumpul;
-            } else {
-                title.innerText = 'Tambah Kebutuhan';
-                form.action = "{{ route('admin.needs.store') }}";
-                methodInput.value = 'POST';
-                divTerkumpul.classList.add('hidden');
-                form.reset();
-            }
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalNeed');
-            if (event.target == modal) {
-                closeModal('modalNeed');
-            }
-        }
-    </script>
 </div>
