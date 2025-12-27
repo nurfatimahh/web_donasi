@@ -10,7 +10,6 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\HomeController;
 
-//Public Routes (Bisa diakses tanpa login)
 
 
 // Halaman Utama (API Quran/Home) - Dipindah ke sini agar tidak perlu login
@@ -53,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::patch('/donations/{donation}/verify', [DonationController::class, 'verify'])->name('donations.verify');
+        Route::patch('/donations/{donation}/reject', [DonationController::class, 'reject'])->name('donations.reject');
 
         Route::resource('programs', ProgramController::class);
         Route::resource('needs', NeedController::class);
@@ -62,11 +62,9 @@ Route::middleware('auth')->group(function () {
 
         // CRUD Lengkap Donasi Admin
         Route::resource('donations', DonationController::class);
-<<<<<<< HEAD
-=======
+
 
         Route::patch('/admin/donations/{donation}/reject', [App\Http\Controllers\DonationController::class, 'reject'])
             ->name('admin.donations.reject');
->>>>>>> d2232b2cff123f83396ff8282b52ecf9514a0448
     });
 });

@@ -2,6 +2,7 @@
     <x-navbar></x-navbar>
     <x-slot:title>Home</x-slot:title>
 
+
     <section class="bg-green-700 bg-pattern text-center pt-10 pb-36 px-4 relative z-10 overflow-hidden">
         <div class="container mx-auto">
             <h3 id="hero-title"

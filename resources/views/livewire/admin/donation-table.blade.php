@@ -39,7 +39,7 @@
             </a>
         </div>
     </div>
-
+    <!--Tabel  -->
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -56,6 +56,9 @@
                         <th
                             class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">
                             Status</th>
+                        <th
+                            class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">
+                            Bukti</th>
                         <th
                             class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">
                             Verifikasi</th>
@@ -107,23 +110,61 @@
                                     {{ $donation->status }}
                                 </span>
                             </td>
+                            <td class="px-6 py-4 text-center">
+                                @if($donation->jenis_donasi == 'uang' && $donation->bukti_transfer)
+                                    <a href="{{ asset('storage/' . $donation->bukti_transfer) }}" target="_blank"
+                                        class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-emerald-100 hover:text-emerald-600 transition-colors"
+                                        title="Lihat Bukti Transfer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                @elseif($donation->jenis_donasi == 'uang')
+                                    <span class="text-xs text-slate-300 italic">-</span>
+                                @else
+                                    <span class="text-xs text-slate-300">-</span>
+                                @endif
+                            </td>
 
                             <td class="px-6 py-4 text-center">
                                 @if($donation->status === 'pending')
-                                    <form action="{{ route('admin.donations.verify', $donation->id) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit"
-                                            onclick="return confirm('Konfirmasi bahwa donasi ini telah diterima?')"
-                                            class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-[12px] font-bold px-4 py-2 rounded-xl transition-all active:scale-95 shadow-lg shadow-emerald-100 uppercase">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            Terima
-                                        </button>
-                                    </form>
+                                    <div class="flex items-center justify-center gap-2">
+                                        {{-- Tombol Terima --}}
+                                        <form action="{{ route('admin.donations.verify', $donation->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" onclick="return confirm('Konfirmasi terima donasi ini?')"
+                                                class="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition-all active:scale-95 shadow-md shadow-emerald-100 uppercase"
+                                                title="Terima">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Terima
+                                            </button>
+                                        </form>
+
+                                        {{-- Tombol Tolak --}}
+                                        <form action="{{ route('admin.donations.reject', $donation->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" onclick="return confirm('Konfirmasi tolak donasi ini?')"
+                                                class="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition-all active:scale-95 shadow-md shadow-red-100 uppercase"
+                                                title="Tolak">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                                Tolak
+                                            </button>
+                                        </form>
+                                    </div>
                                 @else
                                     <span
                                         class="text-[12px] text-slate-300 font-bold italic uppercase tracking-widest">Selesai</span>
