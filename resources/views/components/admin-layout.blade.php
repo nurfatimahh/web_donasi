@@ -135,9 +135,7 @@
     </div>
     </div>
 
-    <footer class="p-8 pt-0 text-center text-slate-400 text-[10px] font-medium uppercase tracking-[0.2em]">
-        &copy; 2025 DonasiKita - Administrasi
-    </footer>
+
     </main>
     </div>
     @livewireScripts

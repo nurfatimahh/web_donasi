@@ -2,19 +2,25 @@
     <x-navbar></x-navbar>
     <x-slot:title>Home</x-slot:title>
 
-    <section class="bg-green-700 bg-pattern text-center pt-10 pb-36 px-4 relative z-10">
+    <section class="bg-green-700 bg-pattern text-center pt-10 pb-36 px-4 relative z-10 overflow-hidden">
         <div class="container mx-auto">
-            <h3 class="text-amber-300 text-xl md:text-2xl font-bold mb-3 tracking-wide drop-shadow-sm">
+            <h3 id="hero-title"
+                class="text-amber-300 text-xl md:text-2xl font-bold mb-3 tracking-wide drop-shadow-sm opacity-0 transform translate-y-10 transition-all duration-700 ease-out">
                 Pembangunan Masjid An-Nurul Fajri
             </h3>
-            <h1 class="text-white text-2xl md:text-4xl leading-relaxed font-extrabold drop-shadow-md">
+
+            <h1 id="hero-heading"
+                class="text-white text-2xl md:text-4xl leading-relaxed font-extrabold drop-shadow-md opacity-0 transform translate-y-10 transition-all duration-700 ease-out">
                 Mari bersama membangun rumah Allah sebagai pusat ibadah, pembinaan umat, dan persatuan masyarakat.
             </h1>
-            <p class="text-green-200 opacity-90 mt-4 mb-6">
+
+            <p id="hero-desc"
+                class="text-green-200 opacity-0 mt-4 mb-6 transform translate-y-10 transition-all duration-700 ease-out">
                 Setiap donasi Anda adalah investasi akhirat yang tak ternilai harganya.
             </p>
 
-            <div class="pt-10 flex justify-center">
+            <div id="hero-btn-container"
+                class="pb-4 flex justify-center opacity-0 transform translate-y-10 transition-all duration-500 ease-out">
                 @auth
                     <button type="button" onclick="openModalDonasi('modalDonasi')"
                         class="w-fit text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-yellow-500 py-4 px-12 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-orange-500/50 border-4 border-white cursor-pointer">
@@ -27,6 +33,7 @@
                     </a>
                 @endauth
             </div>
+        </div>
     </section>
 
 
@@ -35,41 +42,23 @@
     <!-- Konten -->
     <main class="px-4 relative z-20 -mt-32 mb-20">
 
+        <!-- Ayat-->
+        <div id="quran-card" class="max-w-6xl mx-auto bg-white rounded-xl shadow-2xl p-10 md:p-14 text-center mb-12 
+            opacity-0 transform translate-y-5 transition-all duration-500 ease-out pointer-events-none">
 
-        <!-- <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-10 md:p-14 text-center mb-12">
             <p id="ayah-arabic" class="text-gray-600 text-2xl md:text-3xl leading-relaxed mb-6 font-serif">
-                ...
             </p>
 
             <div class="inline-block mb-8">
                 <p id="ayah-info" class="text-green-800 font-bold text-lg bg-green-50 px-4 py-2 rounded-lg">
-                    Memuat Ayat...
                 </p>
             </div>
 
             <p id="ayah-translation" class="text-gray-600 text-lg md:text-xl leading-relaxed mb-4 italic">
-                "..."
-            </p>
-
-            <div class="inline-block">
-                <p class="text-xs text-gray-400 uppercase tracking-widest font-bold">
-                    Qur'an Jariyah Digital
-                </p>
-            </div>
-        </div>
-
-        <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-4 italic">
-            “Apabila seseorang meninggal dunia, maka terputuslah amalnya kecuali tiga perkara:
-            sedekah jariyah, ilmu yang bermanfaat, dan anak shalih yang mendoakannya.”
-        </p>
-
-        <div class="inline-block">
-            <p class="text-green-800 font-bold text-lg bg-green-50 px-4 py-2 rounded-lg">
-                HR. Muslim
             </p>
         </div>
-        </div> -->
 
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div class="md:col-span-2 space-y-6">
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
@@ -245,54 +234,4 @@
         </div>
     </div>
 
-    <script>//tes javascript
-        window.openModalDonasi = function (id) {
-            document.getElementById(id).classList.remove('hidden');
-        };
-
-        window.closeModal = function (id) {
-            document.getElementById(id).classList.add('hidden');
-        };
-
-        window.switchTabDonasi = function (mode) {
-            const areaUang = document.getElementById('areaUang');
-            const areaBarang = document.getElementById('areaBarang');
-            const jenisInput = document.getElementById('jenis_donasi');
-            const tabUangBtn = document.getElementById('tabUangBtn');
-            const tabBarangBtn = document.getElementById('tabBarangBtn');
-
-            const inputNominal = document.getElementById('inputNominal');
-            const selectNeed = document.getElementById('selectNeed');
-            const inputJumlah = document.getElementById('inputJumlah');
-
-            if (mode === 'barang') {
-                areaUang.classList.add('hidden');
-                areaBarang.classList.remove('hidden');
-                jenisInput.value = 'barang';
-
-                // Update Style Tab
-                tabBarangBtn.classList.add('border-green-500', 'bg-green-50');
-                tabUangBtn.classList.remove('border-orange-500', 'bg-orange-50');
-
-                // Toggle Required
-                inputNominal.required = false;
-                selectNeed.required = true;
-                inputJumlah.required = true;
-            } else {
-                areaBarang.classList.add('hidden');
-                areaUang.classList.remove('hidden');
-                jenisInput.value = 'uang';
-
-                // Update Style Tab
-                tabUangBtn.classList.add('border-orange-500', 'bg-orange-50');
-                tabBarangBtn.classList.remove('border-green-500', 'bg-green-50');
-
-                // Toggle Required
-                inputNominal.required = true;
-                selectNeed.required = false;
-                inputJumlah.required = false;
-            }
-        };
-
-    </script>
 </x-layout>
