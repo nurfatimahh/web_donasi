@@ -25,8 +25,11 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
-                        <span
-                            class="absolute top-1 right-0.5 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-green-700"></span>
+                        @php $unread = auth()->user()->unreadNotifications->count() ?? 0; @endphp
+                        @if ($unread > 0)
+                            <span
+                                class="absolute -top-2 -right-2 inline-flex items-center justify-center min-w-[18px] px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[11px] font-bold">{{ $unread }}</span>
+                        @endif
                     </button>
 
                     <div id="notificationDropdown"
@@ -36,61 +39,74 @@
                             <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
                                     fill="currentColor">
-                                    <path
-                                        d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                                    <path d="M10 2a6 6 0 00-6 6v3l-1 2h14l-1-2V8a6 6 0 00-6-6z" />
                                 </svg>
                                 Notifikasi
                             </h3>
-                            <span class="text-[10px] font-bold bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">2
+                            <span
+                                class="text-[10px] font-bold bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">{{ auth()->user()->unreadNotifications->count() }}
                                 Baru</span>
                         </div>
 
                         <div class="max-h-[400px] overflow-y-auto divide-y divide-slate-50">
-                            {{-- Item 1: Diterima --}}
-                            <div class="p-3 bg-emerald-50/50 hover:bg-emerald-50 transition-colors cursor-pointer group">
-                                <div class="flex gap-3">
-                                    <div class="mt-1 p-1.5 bg-emerald-100 rounded-full text-emerald-600 h-fit shrink-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7" />
-                                        </svg>
+                            @php
+                                $notifications = auth()->user()->notifications()->latest()->take(10)->get();
+                            @endphp
+
+                            @forelse($notifications as $notification)
+                                @php
+                                    $data = (array) ($notification->data ?? []);
+                                    $isUnread = is_null($notification->read_at);
+
+                                    // Tentukan background berdasarkan warna notifikasi (red = ditolak)
+                                    if ($isUnread) {
+                                        if (str_contains($data['color'] ?? '', 'red')) {
+                                            $itemBg = 'bg-red-50/50';
+                                            $hoverClass = 'hover:bg-red-50';
+                                            $iconContainer =
+                                                'mt-1 p-1.5 bg-red-100 rounded-full text-red-600 h-fit shrink-0';
+                                        } elseif (str_contains($data['color'] ?? '', 'green')) {
+                                            $itemBg = 'bg-emerald-50/50';
+                                            $hoverClass = 'hover:bg-emerald-50';
+                                            $iconContainer =
+                                                'mt-1 p-1.5 bg-emerald-100 rounded-full text-emerald-600 h-fit shrink-0';
+                                        } else {
+                                            $itemBg = 'bg-amber-50/50';
+                                            $hoverClass = 'hover:bg-amber-50';
+                                            $iconContainer =
+                                                'mt-1 p-1.5 bg-amber-100 rounded-full text-amber-600 h-fit shrink-0';
+                                        }
+                                    } else {
+                                        $itemBg = 'bg-white';
+                                        $hoverClass = 'hover:bg-slate-50';
+                                        $iconContainer =
+                                            'mt-1 p-1.5 bg-slate-100 rounded-full text-slate-600 h-fit shrink-0';
+                                    }
+                                @endphp
+
+                                <a href="{{ route('notifications.read', $notification->id) }}"
+                                    class="block p-3 {{ $itemBg }} {{ $hoverClass }} transition-colors group">
+                                    <div class="flex gap-3">
+                                        <div class="{{ $iconContainer }}">
+                                            <i
+                                                class="fa {{ $data['icon'] ?? 'fa-info-circle' }} {{ $data['color'] ?? 'text-green-500' }}"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-slate-800">
+                                                {{ $data['pesan'] ?? 'Notifikasi baru' }}</p>
+                                            <p class="text-[12px] text-slate-500 mt-1">
+                                                {{ $notification->created_at->diffForHumans() }}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p
-                                            class="text-sm font-bold text-slate-700 group-hover:text-emerald-700 transition-colors">
-                                            Donasi Diterima</p>
-                                        <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Donasi uang sebesar Rp
-                                            500.000 telah diverifikasi oleh Admin.</p>
-                                        <p class="text-[10px] text-slate-400 mt-1 font-semibold">2 menit yang lalu</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Item 2: Ditolak --}}
-                            <div class="p-3 bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer group">
-                                <div class="flex gap-3">
-                                    <div class="mt-1 p-1.5 bg-red-100 rounded-full text-red-600 h-fit shrink-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p
-                                            class="text-sm font-bold text-slate-700 group-hover:text-red-700 transition-colors">
-                                            Donasi Ditolak</p>
-                                        <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Bukti transfer untuk donasi
-                                            #8821 tidak terbaca. Mohon upload ulang.</p>
-                                        <p class="text-[10px] text-slate-400 mt-1 font-semibold">1 jam yang lalu</p>
-                                    </div>
-                                </div>
-                            </div>
+                                </a>
+                            @empty
+                                <div class="p-3 text-center text-sm text-slate-500">Tidak ada notifikasi.</div>
+                            @endforelse
                         </div>
 
-                        <a href="#"
+                        <a href="{{ route('notifications.markAllRead') }}"
                             class="block bg-slate-50 p-2 text-center text-xs font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 transition-colors">
-                            Lihat Semua Notifikasi
+                            Tandai Semua Dibaca
                         </a>
                     </div>
                 </div>
@@ -107,8 +123,8 @@
                             {{ Auth::user()->name }}
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4 text-amber-300 transition-transform duration-200" id="profileArrow" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                            class="h-4 w-4 text-amber-300 transition-transform duration-200" id="profileArrow"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
@@ -162,7 +178,8 @@
                         <a href="/about" class="block hover:text-emerald-200">Tentang Kami</a>
                         <a href="/program" class="block hover:text-emerald-200">Program</a>
                         @guest
-                            <a href="{{ route('login') }}" class="block text-amber-300 border-t border-green-700 pt-4">Masuk
+                            <a href="{{ route('login') }}"
+                                class="block text-amber-300 border-t border-green-700 pt-4">Masuk
                                 / Daftar</a>
                         @endguest
                     </div>
@@ -199,7 +216,7 @@
     }
 
     // Menutup dropdown jika klik di luar area
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', function(event) {
         const isButton = event.target.closest('button[onclick^="toggleDropdown"]');
         const isDropdown = event.target.closest('[id$="Dropdown"]');
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Need;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\DonationStatusUpdated;
 
 class DonationController extends Controller
 {
@@ -90,6 +91,11 @@ class DonationController extends Controller
                 $donation->need->increment('jumlah_terkumpul', $donation->jumlah_barang);
             }
 
+            // Kirim notifikasi kepada pemilik donasi
+            if ($donation->user) {
+                $donation->user->notify(new DonationStatusUpdated($donation));
+            }
+
             return redirect()->back()->with('success', 'Donasi berhasil diverifikasi!');
         }
 
@@ -103,6 +109,11 @@ class DonationController extends Controller
     {
         if ($donation->status === 'pending') {
             $donation->update(['status' => 'ditolak']);
+            // Kirim notifikasi kepada pemilik donasi
+            if ($donation->user) {
+                $donation->user->notify(new DonationStatusUpdated($donation));
+            }
+
             return redirect()->back()->with('success', 'Donasi telah ditolak.');
         }
         return redirect()->back()->with('error', 'Status donasi tidak valid untuk ditolak.');
@@ -133,6 +144,10 @@ class DonationController extends Controller
         }
 
         $donation->update($validated);
+
+        if (in_array($validated['status'], ['sukses', 'ditolak']) && $donation->user) {
+            $donation->user->notify(new DonationStatusUpdated($donation));
+        }
 
         // PERBAIKAN: Gunakan nama rute yang benar
         return redirect()->route('admin.donations.index')->with('success', 'Donasi berhasil diperbarui.');
@@ -167,5 +182,4 @@ class DonationController extends Controller
         $mpdf->WriteHTML($html);
         return $mpdf->Output('Laporan-Donasi.pdf', 'I');
     }
-
 }
