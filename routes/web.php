@@ -62,8 +62,11 @@ Route::middleware('auth')->group(function () {
 
         // CRUD Lengkap Donasi Admin
         Route::resource('donations', DonationController::class);
+<<<<<<< HEAD
+=======
 
         Route::patch('/admin/donations/{donation}/reject', [App\Http\Controllers\DonationController::class, 'reject'])
             ->name('admin.donations.reject');
+>>>>>>> d2232b2cff123f83396ff8282b52ecf9514a0448
     });
 });
