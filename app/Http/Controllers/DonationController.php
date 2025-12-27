@@ -37,15 +37,11 @@ class DonationController extends Controller
         $totalBarang = Donation::where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
         $pendingCount = Donation::where('status', 'pending')->count();
 
-        // 4. Ambil data dengan paginasi
-        $donations = Donation::with(['user', 'need'])
-            ->latest()
-            ->paginate(10);
+       
         return view('admin.donations.index', compact(
-            'donations',
-            'totalAmount',
-            'totalBarang',
-            'pendingCount'
+        'totalAmount', 
+        'totalBarang', 
+        'pendingCount'
         ));
     }
 
