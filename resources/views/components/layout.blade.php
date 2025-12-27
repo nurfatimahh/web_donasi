@@ -26,18 +26,34 @@
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
     {{ $slot }}
-    @if(!request()->routeIs('home'))
-        <button onclick="openModalDonasi('modalDonasiGlobal')"
-            class="fixed bottom-6 right-6 z-[60] bg-gradient-to-r from-orange-500 to-amber-400 text-white font-bold py-4 px-6 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-3 border-2 border-white group">
+    @if(!request()->is('/', 'login*', 'register*'))
+        @auth
+            {{-- Tombol untuk yang SUDAH LOGIN (Membuka Modal) --}}
+            <button onclick="openModalDonasi('modalDonasiGlobal')"
+                class="fixed bottom-6 right-6 z-[60] bg-gradient-to-r from-orange-500 to-amber-400 text-white font-bold py-4 px-6 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-3 border-2 border-white group">
 
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 animate-bounce" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 animate-bounce" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
 
-            <span class="text-lg">Donasi Sekarang</span>
-        </button>
+                <span class="text-lg">Donasi Sekarang</span>
+            </button>
+        @else
+            {{-- Tombol untuk GUEST (Redirect ke Login) --}}
+            <a href="{{ route('login') }}"
+                class="fixed bottom-6 right-6 z-[60] bg-gradient-to-r from-orange-500 to-amber-400 text-white font-bold py-4 px-6 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-3 border-2 border-white group">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 animate-bounce" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <span class="text-lg">Donasi Sekarang</span>
+            </a>
+        @endauth
 
         <div id="modalDonasiGlobal"
             class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 px-4 transition-all duration-300">
@@ -197,14 +213,10 @@
         };
     </script>
 
+
     <footer class="mt-auto py-6 text-center text-stone-50 text-sm bg-green-700">
         &copy; 2025 DonasiKita
     </footer>
-</body>
-
-<footer class="mt-auto py-6 text-center text-stone-50 text-sm bg-green-700">
-    &copy; 2025 DonasiKita
-</footer>
 
 </body>
 

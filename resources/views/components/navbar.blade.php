@@ -12,7 +12,6 @@
             <a href="/" class="hover:text-emerald-200 transition">Home</a>
             <a href="/about" class="hover:text-emerald-200 transition">Tentang Kami</a>
             <a href="/program" class="hover:text-emerald-200 transition">Program</a>
-            <a href="/donasi" class="hover:text-emerald-200 transition">Donasi</a>
             <a href="/contact" class="hover:text-emerald-200 transition">Kontak</a>
         </nav>
 
@@ -48,13 +47,13 @@
 
                         <a href="/admin/profile"
                             class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
-                            👤 Profil
+                            Profil
                         </a>
 
                         <!-- <a href="{{ route('dashboard') }}"
-                                class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
-                                📊 Dashboard Saya
-                            </a> -->
+                                                        class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                                                        Dashboard Saya
+                                                    </a> -->
 
                         <div class="border-t border-slate-100 my-1"></div>
 
@@ -63,14 +62,18 @@
                             @csrf
                             <button type="submit"
                                 class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 font-black transition-colors cursor-pointer">
-                                🚪 Logout
+                                Logout
                             </button>
                         </form>
                     </div>
                 </div>
             @else
-                <a href="{{ route('login') }}"
-                    class="hidden md:block text-sm font-bold hover:text-emerald-200 transition">Masuk</a>
+                <a href="{{ route('login') }}" class="hidden md:block text-sm font-bold px-6 py-2 rounded-full border-2 border-white 
+                      bg-white text-emerald-600
+                      transition-all duration-300 ease-in-out
+                      hover:bg-emerald-700 hover:text-white hover:border-emerald-700 hover:scale-105">
+                    Masuk
+                </a>
             @endauth
 
             {{-- Mobile Menu Toggle (Checkbox Hack) --}}
@@ -91,7 +94,6 @@
                         <a href="/" class="block hover:text-emerald-200">Home</a>
                         <a href="/about" class="block hover:text-emerald-200">Tentang Kami</a>
                         <a href="/program" class="block hover:text-emerald-200">Program</a>
-                        <a href="/donasi" class="block hover:text-emerald-200">Donasi</a>
                         @guest
                             <a href="{{ route('login') }}" class="block text-amber-300 border-t border-green-700 pt-4">Masuk
                                 / Daftar</a>

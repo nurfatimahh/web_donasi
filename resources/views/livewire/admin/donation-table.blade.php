@@ -1,4 +1,5 @@
-<div> <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm mb-6 flex flex-wrap gap-4 items-center">
+<div>
+    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm mb-6 flex flex-wrap gap-4 items-center">
         <div class="flex flex-wrap gap-3 flex-1">
             <div class="relative flex-1 min-w-[200px] group">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -15,14 +16,14 @@
             <select wire:model.live="type"
                 class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer text-slate-600">
                 <option value="">Semua Jenis</option>
-                <option value="uang">💰 Uang</option>
-                <option value="barang">📦 Barang</option>
+                <option value="uang"> Uang</option>
+                <option value="barang"> Barang</option>
             </select>
 
             <select wire:model.live="sort"
                 class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer text-slate-600">
                 <option value="">Urutan Default</option>
-                <option value="highest">📈 Nilai Tertinggi</option>
+                <option value="highest"> Nilai Tertinggi</option>
             </select>
         </div>
 
@@ -44,11 +45,20 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-50 border-b border-slate-100">
-                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center w-16">No</th>
-                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Donatur</th>
+                        <th
+                            class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center w-16">
+                            No</th>
+                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Donatur
+                        </th>
                         <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Jenis</th>
-                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Nilai / Jumlah</th>
-                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">Status</th>
+                        <th class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Nilai /
+                            Jumlah</th>
+                        <th
+                            class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">
+                            Status</th>
+                        <th
+                            class="px-6 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest text-center">
+                            Verifikasi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
@@ -59,13 +69,19 @@
                             </td>
                             <td class="px-6 py-4">
                                 <p class="text-sm font-bold text-slate-700">{{ $donation->nama_donatur }}</p>
-                                <p class="text-[10px] text-slate-400 font-medium italic">Oleh: {{ $donation->user->name ?? 'User' }}</p>
+                                <p class="text-[12px] text-slate-400 font-medium italic">Oleh:
+                                    {{ $donation->user->name ?? 'User' }}
+                                </p>
                             </td>
                             <td class="px-6 py-4">
                                 @if($donation->jenis_donasi == 'uang')
-                                    <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 uppercase">💰 Uang</span>
+                                    <span
+                                        class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[12px] font-bold bg-emerald-50 text-emerald-600 uppercase">
+                                        Uang</span>
                                 @else
-                                    <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-600 uppercase">📦 Barang</span>
+                                    <span
+                                        class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[12px] font-bold bg-blue-50 text-blue-600 uppercase">
+                                        Barang</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-sm font-semibold text-slate-600">
@@ -73,7 +89,8 @@
                                     Rp {{ number_format($donation->nominal, 0, ',', '.') }}
                                 @else
                                     {{ $donation->jumlah_barang }} Unit
-                                    <p class="text-[10px] text-slate-400 font-medium italic">({{ $donation->need->nama_barang ?? 'Umum' }})</p>
+                                    <p class="text-[12px] text-slate-400 font-medium italic">
+                                        ({{ $donation->need->nama_barang ?? 'Umum' }})</p>
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">
@@ -85,14 +102,38 @@
                                     ];
                                     $color = $colors[$donation->status] ?? 'bg-slate-50 text-slate-600';
                                 @endphp
-                                <span class="px-2.5 py-1 rounded-lg {{ $color }} text-[10px] font-black uppercase tracking-wider">
+                                <span
+                                    class="px-2.5 py-1 rounded-lg {{ $color }} text-[12px] font-black uppercase tracking-wider">
                                     {{ $donation->status }}
                                 </span>
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                @if($donation->status === 'pending')
+                                    <form action="{{ route('admin.donations.verify', $donation->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            onclick="return confirm('Konfirmasi bahwa donasi ini telah diterima?')"
+                                            class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-[12px] font-bold px-4 py-2 rounded-xl transition-all active:scale-95 shadow-lg shadow-emerald-100 uppercase">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Terima
+                                        </button>
+                                    </form>
+                                @else
+                                    <span
+                                        class="text-[12px] text-slate-300 font-bold italic uppercase tracking-widest">Selesai</span>
+                                @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-12 text-center text-slate-400 font-medium">Belum ada data donasi.</td>
+                            <td colspan="6" class="px-6 py-12 text-center text-slate-400 font-medium">Belum ada data donasi.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -100,9 +141,11 @@
         </div>
     </div>
 
+
+
+
     <div class="mt-4">
         {{ $donations->links() }}
     </div>
 
 </div>
-
