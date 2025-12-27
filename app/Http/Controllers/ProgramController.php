@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProgramController extends Controller
 {
   /**
    * READ: tampilkan daftar program.
    */
-  public function index()
-  {
-    $programs = Program::latest()->paginate(10);
-
-    return view('admin.programs.index', compact('programs'));
+  public function index() {
+    return view('admin.programs.index');
   }
+  
   /**
    * CREATE: tampilkan form buat program baru.
    */
@@ -37,8 +36,10 @@ class ProgramController extends Controller
       'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
     ]);
 
+    // Handle image upload
     if ($request->hasFile('gambar')) {
-      $path = $request->file('gambar')->store('programs', 'public');
+      $file = $request->file('gambar');
+      $path = $file->store('programs', 'public');
       $validated['gambar'] = $path;
     }
 
@@ -69,8 +70,16 @@ class ProgramController extends Controller
       'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
     ]);
 
+    // Handle image upload - delete old image if new one is uploaded
     if ($request->hasFile('gambar')) {
-      $path = $request->file('gambar')->store('programs', 'public');
+      // Delete old image if it exists
+      if ($program->gambar && Storage::disk('public')->exists($program->gambar)) {
+        Storage::disk('public')->delete($program->gambar);
+      }
+
+      // Store new image
+      $file = $request->file('gambar');
+      $path = $file->store('programs', 'public');
       $validated['gambar'] = $path;
     }
 
@@ -85,14 +94,26 @@ class ProgramController extends Controller
    */
   public function destroy(Program $program)
   {
-    $program->delete();
-    return redirect()->route('admin.programs.index')
-      ->with('success', 'Program berhasil dihapus.');
+    // Delete associated image file if it exists
+    if ($program->gambar && Storage::disk('public')->exists($program->gambar)) {
+      Storage::disk('public')->delete($program->gambar);
     }
 
-    public function publicIndex()
+    $program->delete();
+
+    return redirect()->route('admin.programs.index')
+      ->with('success', 'Program berhasil dihapus.');
+  }
+
+  public function publicIndex()
   {
       $programs = Program::latest()->get();
       return view('program', compact('programs'));
+  }
+
+  public function show(Program $program)
+  {
+      // Mengarahkan ke resources/views/admin/programs/show.blade.php
+      return view('admin.programs.show', compact('program'));
   }
 }
