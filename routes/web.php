@@ -7,8 +7,17 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\NeedController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ProfileController;
+
+
+Route::get('/', function () {
+    $programs = \App\Models\Program::latest()->get();
+    // Ambil data kebutuhan untuk isi dropdown di modal donasi
+    $needs = \App\Models\Need::all();
+
+    return view('welcome', compact('needs', 'programs'));
+
+});
 
 //Public Routes (Bisa diakses tanpa login)
 
@@ -20,13 +29,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', function () {
     return view('contact');
 });
+
 Route::get('/about', function () {
     return view('about');
 });
-Route::get('/program', [ProgramController::class, 'publicIndex']);
-Route::get('/donasi', function () {
-    return view('donasi');
+
+
+Route::get('/program', function () {
+    // ngambil data program dari database
+    $programs = \App\Models\Program::latest()->get();
+    return view('program', compact('programs'));
 });
+
+Route::get('/donasi', [DonationController::class, 'create'])->name('donasi.create');
 
 // Auth Routes (Guest Middleware)
 Route::middleware('guest')->group(function () {
@@ -61,7 +76,20 @@ Route::middleware('auth')->group(function () {
         // Rute PDF
         Route::get('/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
 
-        // CRUD Lengkap Donasi Admin
-        Route::resource('donations', DonationController::class);
-    });
 });
+
+
+//halaman profile 
+Route::get('/admin/profile', function () {
+    return view('admin.profile');
+});
+
+//pdf reporting
+Route::get('/admin/donations', [DonationController::class, 'index']);
+Route::get('/admin/donations/pdf', [DonationController::class, 'view_pdf'])->name('donations.view_pdf');
+
+//Detail Program 
+Route::get('/program', [ProgramController::class, 'publicIndex']);
+
+// Show detail program
+Route::get('/admin/programs/{program}', [ProgramController::class, 'show'])->name('admin.programs.show');

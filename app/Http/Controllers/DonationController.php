@@ -33,19 +33,15 @@ class DonationController extends Controller
         }
 
         // 3. Hitung Statistik dari Database (BUKAN dari data dummy)
-        $totalUang = Donation::where('status', 'sukses')->where('jenis_donasi', 'uang')->sum('nominal');
+        $totalAmount = Donation::where('jenis_donasi', 'uang')->sum('nominal');
         $totalBarang = Donation::where('status', 'sukses')->where('jenis_donasi', 'barang')->sum('jumlah_barang');
         $pendingCount = Donation::where('status', 'pending')->count();
 
-        // 4. Ambil data dengan paginasi
-        $donations = Donation::with(['user', 'need'])
-            ->latest()
-            ->paginate(10);
+       
         return view('admin.donations.index', compact(
-            'donations',
-            'totalUang',
-            'totalBarang',
-            'pendingCount'
+        'totalAmount', 
+        'totalBarang', 
+        'pendingCount'
         ));
     }
 
@@ -58,7 +54,7 @@ class DonationController extends Controller
         // Ambil daftar kebutuhan untuk donasi barang
         $needs = Need::orderBy('nama_barang')->get();
 
-        return view('admin.donations.create', compact('needs'));
+        return view('donasi', compact('needs'));
     }
 
     /**

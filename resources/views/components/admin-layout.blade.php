@@ -31,7 +31,9 @@
             border-radius: 10px;
         }
     </style>
+    @livewireStyles
 </head>
+
 
 <body class="bg-gray-50 min-h-screen text-slate-900">
     <div class="flex">
@@ -136,6 +138,7 @@
 
     </main>
     </div>
+    @livewireScripts
 </body>
 
 </html>

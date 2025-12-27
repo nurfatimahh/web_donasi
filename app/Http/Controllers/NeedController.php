@@ -13,12 +13,10 @@ class NeedController extends Controller
    */
   public function index()
   {
-    $needs = Need::latest()->paginate(10);
-
-    // Frontend bisa membuat view 'needs.index' sendiri.
-    return view('admin.needs.index', compact('needs'));
+      // Cukup panggil view saja, data list diambil di Livewire
+      return view('admin.needs.index');
   }
-
+  
   /**
    * CREATE: tampilkan form buat kebutuhan baru.
    */
