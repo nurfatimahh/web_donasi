@@ -31,7 +31,7 @@
 
                     <div class="container mx-auto flex flex-col justify-center">
                         {{-- <h3 class="text-amber-500 font-bold uppercase tracking-wider text-sm mb-2">Sejarah & Tujuan</h3> --}}
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Majelis Ta’lim Riyadhul Badi’ah Masjid An-Nurul Fajri</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Majelis Ta’lim Riyadhul Badi’ah</h2>
                         
                         <p class="text-gray-600 leading-relaxed text-center"> 
                             Dalam menghadapi perkembangan zaman yang semakin pesat, 

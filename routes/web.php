@@ -11,8 +11,6 @@ use App\Http\Controllers\NeedController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
-
-
 // Halaman Utama (API Quran/Home) - Dipindah ke sini agar tidak perlu login
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -47,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
+
 
     // Route untuk Notifikasi
     Route::get('/notifications/mark-all-read', function () {
@@ -84,4 +83,9 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/donations/{donation}/reject', [App\Http\Controllers\DonationController::class, 'reject'])
             ->name('admin.donations.reject');
     });
+
+    // Profil User
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
 });
