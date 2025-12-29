@@ -138,7 +138,7 @@
                             <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->email }}</p>
                         </div>
 
-                        <a href="/admin/profile"
+                        <a href="{{ route('profile.index') }}"
                             class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
                             Profil
                         </a>

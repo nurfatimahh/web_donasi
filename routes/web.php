@@ -10,6 +10,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProfileController;
 
 // Halaman Utama (API Quran/Home) - Dipindah ke sini agar tidak perlu login
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -84,8 +85,9 @@ Route::middleware('auth')->group(function () {
             ->name('admin.donations.reject');
     });
 
-    // Profil User
-    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+});
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
