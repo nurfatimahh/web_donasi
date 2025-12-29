@@ -165,18 +165,21 @@ class DonationController extends Controller
      */
     public function view_pdf()
     {
-        // Mengambil semua data (tanpa pagination agar masuk semua ke PDF)
-        $donations = Donation::with(['user', 'need'])->latest()->get();
+        // Tambahkan filter ->where('status', 'sukses')
+        $donations = Donation::with(['user', 'need'])
+            ->where('status', 'sukses') // Filter hanya yang sukses
+            ->latest()
+            ->get();
 
         // Membuat variabel tanggal
         $date = \Carbon\Carbon::now()->format('d/m/Y');
 
-        // Menghitung total donasi uang
+        // Menghitung total donasi uang (otomatis terfilter karena query di atas)
         $totalAmount = $donations->where('jenis_donasi', 'uang')->sum('nominal');
 
         $mpdf = new \Mpdf\Mpdf();
 
-        // Pastikan path view benar: admin/donations/donation.blade.php
+        // Pastikan path view benar
         $html = view('admin.donations.donation', compact('donations', 'date', 'totalAmount'))->render();
 
         $mpdf->WriteHTML($html);

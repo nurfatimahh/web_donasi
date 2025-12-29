@@ -13,6 +13,7 @@ class DonationTable extends Component
     public $search = '';
     public $type = '';
     public $sort = '';
+    public $status = '';
 
     // Penting agar saat search, pagination balik ke halaman 1
     public function updatingSearch()
@@ -39,6 +40,11 @@ class DonationTable extends Component
             $query->orderBy('nominal', 'desc');
         } else {
             $query->latest();
+        }
+        
+        // Filter Status logic
+        if ($this->status) {
+            $query->where('status', $this->status);
         }
 
         return view('livewire.admin.donation-table', [
