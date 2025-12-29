@@ -48,23 +48,23 @@ Route::middleware('auth')->group(function () {
 
 
     // Route untuk Notifikasi
-        Route::get('/notifications/mark-all-read', function () {
-            Auth::user()->unreadNotifications->markAsRead();
-            return redirect()->back();
-        })->name('notifications.markAllRead');
+    Route::get('/notifications/mark-all-read', function () {
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('notifications.markAllRead');
 
-        Route::get('/notifications/{id}/read', function ($id) {
-            $notification = Auth::user()->notifications()->find($id);
-            if ($notification) {
-                $notification->markAsRead();
-                // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
-                return redirect($notification->data['url'] ?? '/');
-            }
-            return redirect()->back();
-        })->name('notifications.read');
+    Route::get('/notifications/{id}/read', function ($id) {
+        $notification = Auth::user()->notifications()->find($id);
+        if ($notification) {
+            $notification->markAsRead();
+            // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
+            return redirect($notification->data['url'] ?? '/');
+        }
+        return redirect()->back();
+    })->name('notifications.read');
 
     // Grup rute admin
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::patch('/donations/{donation}/verify', [DonationController::class, 'verify'])->name('donations.verify');
