@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
+    Route::get('/history', [DonationController::class, 'history'])->name('history');
 
 
     // Route untuk Notifikasi
@@ -58,7 +59,8 @@ Route::middleware('auth')->group(function () {
         if ($notification) {
             $notification->markAsRead();
             // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
-            return redirect($notification->data['url'] ?? '/');
+            // Jika payload notifikasi lama tidak memiliki `url`, arahkan ke halaman history
+            return redirect($notification->data['url'] ?? route('history'));
         }
         return redirect()->back();
     })->name('notifications.read');
@@ -87,5 +89,4 @@ Route::middleware('auth')->group(function () {
     // Profil User
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-
 });
