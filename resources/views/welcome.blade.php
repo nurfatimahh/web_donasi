@@ -62,10 +62,26 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div class="md:col-span-2 space-y-6">
+                                <div class="bg-white p-8 rounded-2xl shadow-xl">
+                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
+                        Latar Belakang Pembangunan Masjid An - Nurul Fajri
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-left">
+                        Dalam menyikapi perkembangan zaman yang begitu pesat, dibutuhkan lembaga
+                        pendidikan (dalam hal ini Agama Islam) yang mampu menjadi tempat yang nyaman
+                        dan aman dalam proses belajar mengajarnya dengan segala kelengkapan sarana
+                        dan prasarananya yang mendukung agar bisa memaksimalkan potensi-potensi
+                        Santriyin/Santriyat. Sehingga apa yang sudah diusahakan bisa menghasilkan
+                        generasi-generasi harapan kita semua.
+                        Majelis Ta'lim Riyadhul Badi'ah merupakan lembaga pendidikan yang berbasis
+                        sala fiyang berpedoman pada Pancasila dan Undang-undang Dasar 1945.
+                    </p>
+                    <br>
+                </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
                     <p class="text-gray-600 leading-relaxed text-left">
                         Majelis Ta'lim Riyadhul Badi'ah yang menaungi pembangunan Masjid
-                        An-Nurul Fajri merupakan lembaga pendidikan swadaya yang berdiri
+                        An-Nurul Fajri yang merupakan lembaga pendidikan swadaya yang berdiri
                         pada tanggal 05 Mei 2018. Disebuah rumah kosong milik salah seorang
                         warga Kp. Manglayang RW 03 Desa Cihanjuang Rahayu, dan Gedung
                         pertama didirikan, kemudian diresmikan pada tanggal 15 Maret 2020.
@@ -74,44 +90,33 @@
                     </p>
                     <br>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Melalui partisipasi dan dukungan kaum muslimin dan muslimat, pembangunan masjid ini terus
-                        berjalan secara bertahap. Setiap donasi, baik berupa uang maupun material, menjadi bagian
-                        dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
+                        Bagi mereka yang membangun tempat ibadah/tempat pendidikan Islam atau
+                        menyediakan dana, barang, jasa dan lain-lain untuk pembangunan-pembangunan
+                        tersebut, relevan seperti dalam Firman Allah SWT. dalam Q.S. Al-Baqarah ayat 261:
+                        ”Perumpamaan nafkah yang dikeluarkan oleh orang-orang yang menafkahkan
+                        hartanya dijalan Allah adalah serupa dengan sebutir benih yang menumbuhkan
+                        tujuh bulir, pada tiap-tiap bulirnya seratus biji Allah melipat-gandakan (ganjaran)
+                        bagi siapa yang Dia kehendaki. Dan Allah Maha Luas Karunia-Nya lagi Maha Mengetahui”.
                     </p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-left">
-                        Pembangunan Masjid
-                    </h2>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Pembangunan Masjid An-Nurul Fajri merupakan ikhtiar bersama dalam menghadirkan sarana ibadah
-                        yang layak, nyaman, dan penuh keberkahan bagi masyarakat. Masjid ini diharapkan menjadi pusat
-                        ibadah, pendidikan keislaman, serta kegiatan sosial umat.
+                        Pengadaan Rumah Ibadah/fasilitas pendidikan keagamaan (Islam) termasuk
+                        salah satu investasi amal bagi kita semua, yang akan mengalirkan pahala terusmenerus
+                        bagi orang-orang yang membangunnya, walau hanya sebutir paku yang
+                        ditancapkanya. Karena hal ini salah satu dari tiga amal yang pahalanya akan terus
+                        mengalir, seperti apa yang sudah disabdakan oleh Rosulullah SAW. :
+                        “Apabila Anak Adam (manusia) meninggal dunia, maka akan putuslah segala amal
+                        perbutannya kecuali tiga perkara: Sedekah jariah, ilmu yang bermanfaat dan Anak
+                        yang soleh yang mendoakan orang-tuanya”. (HR Muslim)
                     </p>
                     <br>
                     <p class="text-gray-600 leading-relaxed text-left">
-                        Melalui partisipasi dan dukungan kaum muslimin dan muslimat, pembangunan masjid ini terus
-                        berjalan secara bertahap. Setiap donasi, baik berupa uang maupun material, menjadi bagian
-                        dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
+                        Insya Allah, janji itu akan tiba pada kita semua yang sudah berpartisipasi atas
+                        pembangunan tersebut.
+                        Aamiin
                     </p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h2 class="text-2xl font-bold text-green-800 mb-4 text-left">
-                        Pembangunan Masjid
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed text-left">
-                        Pembangunan Masjid An-Nurul Fajri merupakan ikhtiar bersama dalam menghadirkan sarana ibadah
-                        yang layak, nyaman, dan penuh keberkahan bagi masyarakat. Masjid ini diharapkan menjadi pusat
-                        ibadah, pendidikan keislaman, serta kegiatan sosial umat.
-                    </p>
-                    <br>
-                    <p class="text-gray-600 leading-relaxed text-left">
-                        Melalui partisipasi dan dukungan kaum muslimin dan muslimat, pembangunan masjid ini terus
-                        berjalan secara bertahap. Setiap donasi, baik berupa uang maupun material, menjadi bagian
-                        dari amal jariyah yang pahalanya terus mengalir hingga akhirat.
-                    </p>
-                </div>
-
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-green-500 sticky top-4">
@@ -128,9 +133,9 @@
 
                     <div class="text-center text-gray-700 space-y-2">
                         <p class="font-semibold">Masjid An-Nurul Fajri</p>
-                        <p>Jl. Contoh Alamat No. 123</p>
-                        <p>Desa Sukamaju, Kecamatan Sejahtera</p>
-                        <p>Kabupaten Bandung, Jawa Barat</p>
+                        <p>Kp Manglayang RT 02 RW 03</p>
+                        <p>Desa Cihanjuang Rahayu Kec. Parongpong</p>
+                        <p>Kab. Bandung Barat Jawa Barat 40559</p>
                     </div>
 
                     <div class="mt-6 flex justify-center">

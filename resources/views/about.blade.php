@@ -34,16 +34,16 @@
                         <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Majelis Ta’lim Riyadhul Badi’ah</h2>
                         
                         <p class="text-gray-600 leading-relaxed text-center"> 
-                            Dalam menghadapi perkembangan zaman yang semakin pesat, 
-                            diperlukan lembaga pendidikan Islam yang mampu menjadi tempat belajar yang nyaman dan aman,
-                            didukung sarana dan prasarana yang memadai untuk mengembangkan potensi santriwan dan santriwati 
-                            secara optimal. Majelis Ta’lim Riyadhul Badi’ah hadir sebagai lembaga pendidikan berbasis salafi 
-                            yang berpedoman pada Pancasila dan Undang-Undang Dasar 1945.
-                            Majelis Ta’lim Riyadhul Badi’ah berfungsi sebagai sarana ibadah untuk mendekatkan diri kepada Allah SWT 
-                            serta meningkatkan keimanan dan ketakwaan. Selain sebagai wadah syiar dakwah dan penguatan ukhuwah Islamiyah 
-                            berlandaskan Ahlussunnah wal Jama’ah, majelis ini juga membina aqidah melalui pengajian rutin, mendidik generasi 
-                            muda agar berakhlakul karimah dan berprestasi melalui pendidikan Al-Qur’an, serta membentuk generasi unggul yang siap 
-                            berkontribusi positif di masyarakat.
+                            Seiring dengan berjalannya waktu, Alhamdulillah perkembangan
+                            Majelis ini makin berkembang, ditandai dengan bertambahnya jumlah
+                            Santri yang sudah tercatat sebanyak 180 orang, belum lagi banyaknya
+                            wacana-wacana para Orang Tua yang berkeinginan menitipkan Anakanaknya
+                            untuk belajar. Bahkan ada pengajian Ibu-ibu dan Bapak-bapak.
+                            Atas dasar pertimbangan itulah, kami bermaksud membangun dan
+                            melengkapi fasilitas-fasilitas penunjang di Majelis yang salah satu di
+                            antaranya pembangunan Masjid An-Nurul Fajri ini agar lebih memadai
+                            dan menjadi “modal” kami untuk mewujudkan cita-cita menjadikan
+                            Majelis ini sebuah Pondok Pesantren dimasa yang akan datang. Aamiin
                         </p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
                             <img src="{{ asset('img/img6.PNG') }}" alt="Ketua" class="w-full h-full object-cover">
                         </div>
-                        <h4 class="font-bold text-lg text-gray-800">nama</h4>
+                        <h4 class="font-bold text-lg text-gray-800">Ade Abuy</h4>
                         <span class="text-sm text-amber-600 font-semibold bg-amber-50 px-3 py-1 rounded-full">Ketua
                             Pembangunan</span>
                     </div>
@@ -133,9 +133,9 @@
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
                             <img src="{{ asset('img/img6.PNG') }}" alt="Bendahara" class="w-full h-full object-cover">
                         </div>
-                        <h4 class="font-bold text-lg text-gray-800">nama</h4>
+                        <h4 class="font-bold text-lg text-gray-800">Ustadz Muhammad Arya</h4>
                         <span
-                            class="text-sm text-green-600 font-semibold bg-green-50 px-3 py-1 rounded-full">Bendahara</span>
+                            class="text-sm text-green-600 font-semibold bg-green-50 px-3 py-1 rounded-full">Pengajar</span>
                     </div>
 
                     <div class="text-center group">
@@ -143,9 +143,8 @@
                             class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-lg group-hover:border-green-500 transition">
                             <img src="{{ asset('img/img6.PNG') }}" alt="Relawan" class="w-full h-full object-cover">
                         </div>
-                        <h4 class="font-bold text-lg text-gray-800">nama</h4>
-                        <span class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Koord.
-                            Relawan</span>
+                        <h4 class="font-bold text-lg text-gray-800">Neng Tarmila</h4>
+                        <span class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Bendahara</span>
                     </div>
 
                 </div>
