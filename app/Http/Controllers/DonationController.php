@@ -182,4 +182,34 @@ class DonationController extends Controller
         $mpdf->WriteHTML($html);
         return $mpdf->Output('Laporan-Donasi.pdf', 'I');
     }
+
+    /**
+     * Show donation history for the authenticated user.
+     */
+    public function history(Request $request)
+    {
+        $userId = Auth::id();
+
+        // Statistik (Hanya menghitung yang SUKSES milik user)
+        $totalAmount = Donation::where('user_id', $userId)
+            ->where('status', 'sukses')
+            ->where('jenis_donasi', 'uang')
+            ->sum('nominal');
+
+        $totalBarang = Donation::where('user_id', $userId)
+            ->where('status', 'sukses')
+            ->where('jenis_donasi', 'barang')
+            ->sum('jumlah_barang');
+
+        $menungguVerifikasi = Donation::where('user_id', $userId)
+            ->where('status', 'pending')
+            ->count();
+
+        $histories = Donation::with('need')
+            ->where('user_id', $userId)
+            ->latest()
+            ->paginate(10);
+
+        return view('history', compact('histories', 'totalAmount', 'totalBarang', 'menungguVerifikasi'));
+    }
 }
