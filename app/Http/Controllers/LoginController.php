@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
- 
+
     public function showLoginForm()
     {
         return view('login');
@@ -25,7 +25,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            $intended = Auth::user() && (Auth::user()->role ?? 'user') === 'admin'
+                ? route('admin.dashboard')
+                : '/';
+
+            return redirect()->intended($intended);
         }
 
         return back()

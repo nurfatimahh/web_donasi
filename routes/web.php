@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -49,12 +50,12 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk Notifikasi
     Route::get('/notifications/mark-all-read', function () {
-        auth()->user()->unreadNotifications->markAsRead();
+        Auth::user()->unreadNotifications->markAsRead();
         return redirect()->back();
     })->name('notifications.markAllRead');
 
     Route::get('/notifications/{id}/read', function ($id) {
-        $notification = auth()->user()->notifications()->find($id);
+        $notification = Auth::user()->notifications()->find($id);
         if ($notification) {
             $notification->markAsRead();
             // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
@@ -64,7 +65,7 @@ Route::middleware('auth')->group(function () {
     })->name('notifications.read');
 
     // Grup rute admin
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::patch('/donations/{donation}/verify', [DonationController::class, 'verify'])->name('donations.verify');
