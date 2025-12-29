@@ -20,6 +20,14 @@
                 <option value="barang"> Barang</option>
             </select>
 
+            <select wire:model.live="status"
+                class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer text-slate-600">>
+                <option value="">Semua Status</option>
+                <option value="pending">Pending</option>
+                <option value="sukses">Diterima</option>
+                <option value="ditolak">Ditolak</option>
+            </select>
+
             <select wire:model.live="sort"
                 class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer text-slate-600">
                 <option value="">Urutan Default</option>
