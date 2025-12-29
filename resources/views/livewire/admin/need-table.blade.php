@@ -80,7 +80,6 @@
                     @empty
                         <tr>
                             <td colspan="4" class="px-6 py-12 text-center">
-                                <div class="text-slate-300 text-4xl mb-3">📦</div>
                                 <p class="text-slate-500 font-medium">Data kebutuhan tidak ditemukan.</p>
                             </td>
                         </tr>
