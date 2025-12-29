@@ -149,89 +149,100 @@
     </main>
     <!-- Form Donasi -->
     <div id="modalDonasi"
-        class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/50 px-4 transition-all duration-300">
-        <div class="bg-white w-full max-w-md rounded-3xl p-8 shadow-2xl relative">
+        class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/50 px-3 transition-all duration-300">
 
-            <button onclick="closeModal('modalDonasi')"
-                class="absolute top-4 right-4 text-gray-400 hover:text-black text-2xl cursor-pointer">&times;</button>
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-xl relative flex flex-col max-h-[90vh]">
 
-            <h2 class="text-2xl font-bold text-green-800 mb-1 text-center">Form Donasi</h2>
-            <p class="text-sm text-gray-500 text-center mb-6">Pembangunan Masjid An-Nurul Fajri</p>
+            <div class="p-5 pb-0">
+                <button onclick="closeModal('modalDonasi')"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-black text-2xl cursor-pointer z-10">&times;</button>
 
-            <form action="{{ route('admin.donations.store') }}" method="POST" id="formDonasi" class="space-y-4"
-                enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="jenis_donasi" id="jenis_donasi" value="uang">
+                <h2 class="text-2xl font-bold text-green-800 mb-1 text-center">Form Donasi</h2>
+                <p class="text-sm text-gray-500 text-center mb-6">Pembangunan Masjid An-Nurul Fajri</p>
+            </div>
 
-                <div class="flex gap-4 mb-4">
-                    <button type="button" id="tabUangBtn" onclick="switchTabDonasi('uang')"
-                        class="flex-1 py-2 rounded-xl border-2 border-orange-500 bg-orange-50 text-sm font-bold transition-all">
-                        Uang Tunai
-                    </button>
-                    <button type="button" id="tabBarangBtn" onclick="switchTabDonasi('barang')"
-                        class="flex-1 py-2 rounded-xl border-2 border-gray-100 text-sm font-bold transition-all">
-                        Material
-                    </button>
-                </div>
+            <div class="overflow-y-auto p-5 pt-0 scrollbar-thin scrollbar-thumb-gray-200">
+                <form action="{{ route('admin.donations.store') }}" method="POST" id="formDonasi" class="space-y-4"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="jenis_donasi" id="jenis_donasi" value="uang">
 
-                <div class="text-left">
-                    <label class="block text-xs font-bold text-gray-400 uppercase">Nama Donatur</label>
-                    <input type="text" name="nama_donatur" required placeholder="Hamba Allah"
-                        class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500">
-                </div>
-
-                <div id="areaUang" class="space-y-4 text-left">
-                    <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
-                        <p class="text-[10px] text-amber-700 font-bold uppercase mb-1">Transfer Rekening BCA</p>
-                        <p class="text-xl font-mono font-bold text-amber-900 tracking-wider">4532128840</p>
-                        <p class="text-xs text-amber-800 uppercase font-bold">a.n ADE</p>
+                    <div class="flex gap-4 mb-4">
+                        <button type="button" id="tabUangBtn" onclick="switchTabDonasi('uang')"
+                            class="flex-1 py-2 rounded-xl border-2 border-orange-500 bg-orange-50 text-sm font-bold transition-all">
+                            Uang Tunai
+                        </button>
+                        <button type="button" id="tabBarangBtn" onclick="switchTabDonasi('barang')"
+                            class="flex-1 py-2 rounded-xl border-2 border-gray-100 text-sm font-bold transition-all">
+                            Material
+                        </button>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase">Nominal (Rp)</label>
-                        <input type="number" name="nominal" id="inputNominal" placeholder="0" required
+
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-gray-400 uppercase">Nama Donatur</label>
+                        <input type="text" name="nama_donatur" required placeholder="Hamba Allah"
                             class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500">
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase">Upload Bukti Transfer
-                            (Gambar)</label>
-                        <input type="file" name="bukti_transfer" id="inputBukti" accept="image/*"
-                            class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100">
-                    </div>
-                </div>
 
-                <div id="areaBarang" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 p-4 rounded-2xl border border-green-200 text-xs">
-                        <p class="font-bold text-green-700 mb-2 uppercase text-[10px]">Kebutuhan Masjid</p>
-                        @foreach($needs as $need)
-                            <div class="flex justify-between border-b border-green-100 pb-1 mb-1">
-                                <span>{{ $need->nama_barang }}</span>
-                                <span class="font-bold text-red-600">Sisa:
-                                    {{ $need->target_jumlah - $need->jumlah_terkumpul }} {{ $need->satuan }}</span>
-                            </div>
-                        @endforeach
+                    <div id="areaUang" class="space-y-4 text-left">
+                        <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                            <p class="text-[10px] text-amber-700 font-bold uppercase mb-1">Transfer Rekening BCA</p>
+                            <p class="text-xl font-mono font-bold text-amber-900 tracking-wider">4532128840</p>
+                            <p class="text-xs text-amber-800 uppercase font-bold">a.n ADE</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase">Nominal (Rp)</label>
+                            <input type="number" name="nominal" id="inputNominal" placeholder="0" required
+                                class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase">Upload Bukti Transfer
+                                (Gambar)</label>
+                            <input type="file" name="bukti_transfer" id="inputBukti" accept="image/*"
+                                class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase">Pilih Barang</label>
-                        <select name="need_id" id="selectNeed"
-                            class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none">
-                            <option value="">-- Pilih Kebutuhan --</option>
+
+                    <div id="areaBarang" class="hidden space-y-4 text-left">
+                        <div class="bg-green-50 p-4 rounded-2xl border border-green-200 text-xs">
+                            <p class="font-bold text-green-700 mb-2 uppercase text-[10px]">
+                                Kebutuhan Masjid
+                            </p>
+
                             @foreach($needs as $need)
-                                <option value="{{ $need->id }}">{{ $need->nama_barang }}</option>
+                                <div class="flex justify-between border-b border-green-100 pb-1 mb-1">
+                                    <span>{{ $need->nama_barang }}</span>
+                                    <span class="font-bold text-red-600">
+                                        Sisa: {{ $need->target_jumlah - $need->jumlah_terkumpul }} {{ $need->satuan }}
+                                    </span>
+                                </div>
                             @endforeach
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase">Jumlah</label>
-                        <input type="number" name="jumlah_barang" id="inputJumlah" placeholder="Contoh: 10"
-                            class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-green-500">
-                    </div>
-                </div>
+                        </div>
 
-                <button type="submit"
-                    class="w-full bg-orange-500 text-white font-bold py-4 rounded-2xl hover:bg-orange-600 shadow-lg shadow-orange-200 transition-all active:scale-95">
-                    Konfirmasi Donasi
-                </button>
-            </form>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase">Pilih Barang</label>
+                            <select name="need_id" id="selectNeed"
+                                class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-green-500">
+                                <option value="">-- Pilih Kebutuhan --</option>
+                                @foreach($needs as $need)
+                                    <option value="{{ $need->id }}">{{ $need->nama_barang }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase">Jumlah</label>
+                            <input type="number" name="jumlah_barang" id="inputJumlah" placeholder="Contoh: 10"
+                                class="w-full mt-1 p-3 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-all">
+                        Kirim Donasi
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 

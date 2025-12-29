@@ -41,7 +41,7 @@ class DonationTable extends Component
         } else {
             $query->latest();
         }
-        
+
         // Filter Status logic
         if ($this->status) {
             $query->where('status', $this->status);

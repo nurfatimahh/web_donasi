@@ -1,4 +1,4 @@
-<header class="bg-green-700 text-white w-full relative z-50 shadow-md">
+<header class="bg-green-700 text-white w-full sticky top-0 z-50 shadow-md">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <div class="flex items-center">
             <a href="/">
@@ -7,7 +7,7 @@
         </div>
 
         {{-- Desktop Navigation --}}
-        <nav class="hidden md:flex items-center ml-auto space-x-8 font-semibold text-sm">
+        <nav class="hidden md:flex items-center ml-auto space-x-8 font-semibold text-md-10">
             <a href="/" class="hover:text-emerald-200 transition">Home</a>
             <a href="/about" class="hover:text-emerald-200 transition">Tentang Kami</a>
             <a href="/program" class="hover:text-emerald-200 transition">Program</a>
@@ -16,7 +16,7 @@
 
         <div class="flex items-center space-x-4 ml-4">
             @auth
-                {{-- [1] Tombol Lonceng & Dropdown Notifikasi --}}
+                {{--Tombol Lonceng & Dropdown Notifikasi --}}
                 <div class="relative">
                     <button onclick="toggleDropdown('notificationDropdown')"
                         class="text-emerald-100 hover:text-white transition-colors mt-1 p-1 relative focus:outline-none">
@@ -33,17 +33,12 @@
                         @endif
                     </button>
 
-                    {{-- HANYA GANTI BAGIAN INI --}}
                     <div id="notificationDropdown"
                         class="hidden 
-                           {{-- Mobile: Fixed di tengah layar --}}
-                           fixed top-[80px] left-4 right-4 z-[999] w-auto h-auto max-h-[80vh]
-                           {{-- Desktop: Absolute menempel di tombol --}}
-                           md:absolute md:top-full md:right-0 md:left-auto md:mt-3 md:w-96 md:h-auto md:max-h-none
+                                               fixed top-[80px] left-4 right-4 z-[999] w-auto h-auto max-h-[80vh]
+                                               md:absolute md:top-full md:right-0 md:left-auto md:mt-3 md:w-96 md:h-auto md:max-h-none
+                                               bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden origin-top transition-all animate-in fade-in zoom-in duration-200">
 
-                           bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden origin-top transition-all animate-in fade-in zoom-in duration-200">
-
-                        {{-- Header Notifikasi --}}
                         <div
                             class="p-3 bg-amber-50 border-b border-amber-100 flex justify-between items-center sticky top-0 bg-opacity-95 backdrop-blur-sm z-10">
                             <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
@@ -58,7 +53,6 @@
                             </span>
                         </div>
 
-                        {{-- List Notifikasi (Scrollable) --}}
                         <div class="overflow-y-auto max-h-[60vh] md:max-h-[400px] divide-y divide-slate-50">
                             @php
                                 $notifications = auth()->user()->notifications()->latest()->take(10)->get();
@@ -119,7 +113,6 @@
                             @endforelse
                         </div>
 
-                        {{-- Footer Notifikasi --}}
                         <a href="{{ route('notifications.markAllRead') }}"
                             class="block bg-slate-50 p-3 text-center text-xs font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 transition-colors border-t border-slate-100 uppercase tracking-wide">
                             Tandai Semua Dibaca
@@ -153,8 +146,24 @@
                             <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->email }}</p>
                         </div>
 
+                        {{-- Menu Dashboard Baru --}}
+                        <a href="/admin/dashboard"
+                            class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                            Dashboard
+                        </a>
+
                         <a href="/admin/profile"
                             class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
                             Profil
                         </a>
 
@@ -164,6 +173,11 @@
                             @csrf
                             <button type="submit"
                                 class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 font-black transition-colors cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
                                 Logout
                             </button>
                         </form>
@@ -188,7 +202,7 @@
                 </label>
                 <div
                     class="fixed inset-x-0 top-[72px] bg-green-800 border-t border-green-600 shadow-xl hidden peer-checked:block md:hidden">
-                    <div class="px-6 py-4 space-y-4 font-semibold">
+                    <div class="px-6 py-4 space-y-4 font-semibold text">
                         <a href="/" class="block hover:text-emerald-200">Home</a>
                         <a href="/about" class="block hover:text-emerald-200">Tentang Kami</a>
                         <a href="/program" class="block hover:text-emerald-200">Program</a>
@@ -204,33 +218,27 @@
     </div>
 </header>
 
-{{-- Script Pengelola Dropdown (Gabungan Profil & Notifikasi) --}}
+{{-- Script Dropdown Lengkap --}}
 <script>
     function toggleDropdown(id) {
         const dropdown = document.getElementById(id);
         const isHidden = dropdown.classList.contains('hidden');
 
-        // Tutup SEMUA dropdown dulu biar tidak tumpang tindih
         document.querySelectorAll('[id$="Dropdown"]').forEach(el => {
             el.classList.add('hidden');
         });
 
-        // Reset semua panah profil ke posisi semula
         const arrow = document.getElementById('profileArrow');
         if (arrow) arrow.classList.remove('rotate-180');
 
-        // Jika tadi tertutup, maka sekarang BUKA
         if (isHidden) {
             dropdown.classList.remove('hidden');
-
-            // Putar panah jika profil dibuka
             if (id === 'profileDropdown' && arrow) {
                 arrow.classList.add('rotate-180');
             }
         }
     }
 
-    // Menutup dropdown jika klik di luar area
     document.addEventListener('click', function (event) {
         const isButton = event.target.closest('button[onclick^="toggleDropdown"]');
         const isDropdown = event.target.closest('[id$="Dropdown"]');
@@ -239,7 +247,6 @@
             document.querySelectorAll('[id$="Dropdown"]').forEach(el => {
                 el.classList.add('hidden');
             });
-            // Reset panah
             const arrow = document.getElementById('profileArrow');
             if (arrow) arrow.classList.remove('rotate-180');
         }

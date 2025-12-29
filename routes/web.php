@@ -43,7 +43,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
     Route::get('/history', [DonationController::class, 'history'])->name('history');
 
