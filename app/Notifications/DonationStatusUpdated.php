@@ -64,7 +64,7 @@ class DonationStatusUpdated extends Notification
             'pesan' => $pesan,
             'icon' => $icon,
             'color' => $color,
-            'url' => route('dashboard'), // Atau route history jika ada
+            'url' => route('history'), // Arahkan ke halaman riwayat donasi pengguna
             'time' => now()->diffForHumans(),
         ];
     }

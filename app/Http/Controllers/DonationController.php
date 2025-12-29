@@ -165,21 +165,54 @@ class DonationController extends Controller
      */
     public function view_pdf()
     {
-        // Mengambil semua data (tanpa pagination agar masuk semua ke PDF)
-        $donations = Donation::with(['user', 'need'])->latest()->get();
+        // Tambahkan filter ->where('status', 'sukses')
+        $donations = Donation::with(['user', 'need'])
+            ->where('status', 'sukses') // Filter hanya yang sukses
+            ->latest()
+            ->get();
 
         // Membuat variabel tanggal
         $date = \Carbon\Carbon::now()->format('d/m/Y');
 
-        // Menghitung total donasi uang
+        // Menghitung total donasi uang (otomatis terfilter karena query di atas)
         $totalAmount = $donations->where('jenis_donasi', 'uang')->sum('nominal');
 
         $mpdf = new \Mpdf\Mpdf();
 
-        // Pastikan path view benar: admin/donations/donation.blade.php
+        // Pastikan path view benar
         $html = view('admin.donations.donation', compact('donations', 'date', 'totalAmount'))->render();
 
         $mpdf->WriteHTML($html);
         return $mpdf->Output('Laporan-Donasi.pdf', 'I');
+    }
+
+    /**
+     * Show donation history for the authenticated user.
+     */
+    public function history(Request $request)
+    {
+        $userId = Auth::id();
+
+        // Statistik (Hanya menghitung yang SUKSES milik user)
+        $totalAmount = Donation::where('user_id', $userId)
+            ->where('status', 'sukses')
+            ->where('jenis_donasi', 'uang')
+            ->sum('nominal');
+
+        $totalBarang = Donation::where('user_id', $userId)
+            ->where('status', 'sukses')
+            ->where('jenis_donasi', 'barang')
+            ->sum('jumlah_barang');
+
+        $menungguVerifikasi = Donation::where('user_id', $userId)
+            ->where('status', 'pending')
+            ->count();
+
+        $histories = Donation::with('need')
+            ->where('user_id', $userId)
+            ->latest()
+            ->paginate(10);
+
+        return view('history', compact('histories', 'totalAmount', 'totalBarang', 'menungguVerifikasi'));
     }
 }
