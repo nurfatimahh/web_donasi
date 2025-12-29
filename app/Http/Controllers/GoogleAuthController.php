@@ -49,7 +49,12 @@ class GoogleAuthController extends Controller
             }
 
             Auth::login($user);
-            return redirect()->intended('/');
+
+            $intended = Auth::user() && (Auth::user()->role ?? 'user') === 'admin'
+                ? route('admin.dashboard')
+                : '/';
+
+            return redirect()->intended($intended);
         } catch (\Exception $e) {
             // Log error untuk debugging
             return redirect()->route('login')->withErrors(['email' => 'Gagal login dengan Google. Silakan coba lagi.']);
