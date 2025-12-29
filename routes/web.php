@@ -9,8 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\HomeController;
-
-
+use Illuminate\Support\Facades\Auth;
 
 // Halaman Utama (API Quran/Home) - Dipindah ke sini agar tidak perlu login
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -47,21 +46,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/donations/store', [DonationController::class, 'store'])->name('donations.store');
 
-    // Route untuk Notifikasi
-    Route::get('/notifications/mark-all-read', function () {
-        auth()->user()->unreadNotifications->markAsRead();
-        return redirect()->back();
-    })->name('notifications.markAllRead');
 
-    Route::get('/notifications/{id}/read', function ($id) {
-        $notification = auth()->user()->notifications()->find($id);
-        if ($notification) {
-            $notification->markAsRead();
-            // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
-            return redirect($notification->data['url'] ?? '/');
-        }
-        return redirect()->back();
-    })->name('notifications.read');
+    // Route untuk Notifikasi
+        Route::get('/notifications/mark-all-read', function () {
+            Auth::user()->unreadNotifications->markAsRead();
+            return redirect()->back();
+        })->name('notifications.markAllRead');
+
+        Route::get('/notifications/{id}/read', function ($id) {
+            $notification = Auth::user()->notifications()->find($id);
+            if ($notification) {
+                $notification->markAsRead();
+                // Redirect ke URL yang disimpan di data notifikasi, atau ke home jika tidak ada
+                return redirect($notification->data['url'] ?? '/');
+            }
+            return redirect()->back();
+        })->name('notifications.read');
 
     // Grup rute admin
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -83,4 +83,9 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/donations/{donation}/reject', [App\Http\Controllers\DonationController::class, 'reject'])
             ->name('admin.donations.reject');
     });
+
+    // Profil User
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
 });
