@@ -167,7 +167,7 @@
             </div>
 
             <div class="overflow-y-auto p-5 pt-0 scrollbar-thin scrollbar-thumb-gray-200">
-                <form action="{{ route('admin.donations.store') }}" method="POST" id="formDonasi" class="space-y-4"
+                <form action="{{ route('donations.store') }}" method="POST" id="formDonasi" class="space-y-4"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="jenis_donasi" id="jenis_donasi" value="uang">

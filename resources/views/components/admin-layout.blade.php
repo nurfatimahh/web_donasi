@@ -124,12 +124,19 @@
                     {{-- PROFILE DROPDOWN --}}
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open"
-                            class="flex items-center gap-2 sm:gap-3 hover:bg-slate-50 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full border border-transparent hover:border-slate-200 transition-all cursor-pointer focus:outline-none">
-                            {{-- Avatar --}}
-                            <div
-                                class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold border border-emerald-200 text-xs sm:text-sm uppercase">
-                                {{ substr(Auth::user()->name, 0, 2) }}
-                            </div>
+                            class="flex items-center gap-2 sm:gap-3 bg- hover:bg-emerald-100 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full border border-transparent hover:border-slate-200 transition-all cursor-pointer focus:outline-none">
+                            
+                            {{-- LOGIKA FOTO PROFIL --}}
+                            @if(Auth::user()->photo)
+                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" 
+                                     alt="Profile" 
+                                     class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-emerald-200 shadow-sm">
+                            @else
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold border border-emerald-200 text-xs sm:text-sm uppercase">
+                                    {{ substr(Auth::user()->name, 0, 2) }}
+                                </div>
+                            @endif
+
                             {{-- Nama User --}}
                             <span class="hidden md:block font-bold text-sm text-slate-700 tracking-wide">
                                 {{ Auth::user()->name }}
@@ -167,7 +174,7 @@
                                 Kembali ke Beranda
                             </a>
 
-                            <a href="/admin/profile"
+                            <a href="{{ route('profile.index') }}"
                                 class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">

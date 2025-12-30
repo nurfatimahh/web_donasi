@@ -122,11 +122,20 @@
 
                 <div class="relative">
                     <button onclick="toggleDropdown('profileDropdown')"
-                        class="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/20 transition-all cursor-pointer focus:outline-none">
-                        <div
-                            class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center text-green-900 font-black text-xs uppercase shadow-sm">
-                            {{ substr(Auth::user()->name, 0, 2) }}
-                        </div>
+                        class="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full border border-white/20 transition-all cursor-pointer focus:outline-none">
+                        
+                        {{-- MODIFIKASI FOTO PROFIL DI SINI --}}
+                        @if(Auth::user()->photo)
+                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" 
+                                alt="Profile" 
+                                class="w-8 h-8 rounded-full object-cover shadow-sm border border-white/50">
+                        @else
+                            <div class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center text-green-900 font-black text-xs uppercase shadow-sm">
+                                {{ substr(Auth::user()->name, 0, 2) }}
+                            </div>
+                        @endif
+                        {{-- END MODIFIKASI --}}
+
                         <span class="hidden md:block font-bold text-sm text-white tracking-wide">
                             {{ Auth::user()->name }}
                         </span>
@@ -146,18 +155,22 @@
                             <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->email }}</p>
                         </div>
 
-                        {{-- Menu Dashboard Baru --}}
-                        <a href="/admin/dashboard"
-                            class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                            </svg>
-                            Dashboard
-                        </a>
+                        {{-- LOGIKA: Cek apakah user adalah admin --}}
+                        {{-- Ganti 'role' dan 'admin' sesuai kolom di database kamu (misal: usertype == 'admin') --}}
+                        @if(Auth::user()->role === 'admin')
+                            <a href="/admin/dashboard"
+                                class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                                Dashboard
+                            </a>
+                        @endif
 
-                        <a href="/admin/profile"
+                        {{-- Menu Profil (Muncul untuk Admin & User Biasa) --}}
+                        <a href="{{ route('profile.index') }}"
                             class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -169,6 +182,7 @@
 
                         <div class="border-t border-slate-100 my-1"></div>
 
+                        {{-- Menu Logout (Muncul untuk Semua) --}}
                         <form id="logout-form" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
