@@ -50,7 +50,7 @@
 
         {{-- SIDEBAR --}}
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed inset-y-0 left-0 z-30 w-64 bg-emerald-700 text-white shadow-xl flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
+            class="fixed inset-y-0 left-0 z-30 w-64 bg-emerald-700 text-white shadow-xl flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0  lg:inset-0">
 
             {{-- Logo Area --}}
             <div class="flex items-center justify-between p-6 border-b border-emerald-600">
@@ -82,7 +82,7 @@
                 @foreach($menus as $menu)
                             @php $isActive = request()->is(trim($menu['url'], '/')); @endphp
                             <a href="{{ $menu['url'] }}" class="flex items-center px-4 py-3 rounded-lg transition-all duration-200 
-                                                                                    {{ $isActive
+                                                                                                            {{ $isActive
                     ? 'bg-white text-emerald-700 shadow-md font-bold'
                     : 'hover:bg-emerald-600 text-emerald-50 font-medium hover:translate-x-1' }}">
                                 <span class="text-sm tracking-wide">{{ $menu['label'] }}</span>
@@ -99,7 +99,7 @@
         </aside>
 
         {{-- MAIN CONTENT --}}
-        <main class="flex-1 flex flex-col min-w-0 transition-all duration-300">
+        <main class="flex-1 flex flex-col lg:ml-64 min-w-0 transition-all duration-300">
 
             {{-- HEADER --}}
             <header
@@ -125,14 +125,14 @@
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open"
                             class="flex items-center gap-2 sm:gap-3 bg- hover:bg-emerald-100 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full border border-transparent hover:border-slate-200 transition-all cursor-pointer focus:outline-none">
-                            
+
                             {{-- LOGIKA FOTO PROFIL --}}
                             @if(Auth::user()->photo)
-                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" 
-                                     alt="Profile" 
-                                     class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-emerald-200 shadow-sm">
+                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Profile"
+                                    class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-emerald-200 shadow-sm">
                             @else
-                                <div class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold border border-emerald-200 text-xs sm:text-sm uppercase">
+                                <div
+                                    class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold border border-emerald-200 text-xs sm:text-sm uppercase">
                                     {{ substr(Auth::user()->name, 0, 2) }}
                                 </div>
                             @endif
