@@ -106,7 +106,7 @@
                             <span class="text-[10px] text-slate-400 font-bold">{{ $p->created_at->format('d/m/Y') }}</span>
                         </li>
                     @empty
-                        <li class="py-10 text-center text-slate-400 text-sm font-bold italic">Belum ada data program.</li>
+                        <li class="py-10 text-center text-slate-400 text-sm font-bold">Belum ada data program.</li>
                     @endforelse
                 </ul>
             </div>

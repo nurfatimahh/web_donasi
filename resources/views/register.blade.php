@@ -23,35 +23,35 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap</label>
                         <input type="text" name="name"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="Contoh: Budi Santoso">
+                            placeholder="Contoh: Budi Santoso" required>
                     </div>
 
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
                         <input type="text" name="username"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="Contoh: budi_santoso99">
+                            placeholder="Contoh: budi_santoso99" required>
                     </div>
 
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                         <input type="email" name="email"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="nama@email.com">
+                            placeholder="nama@email.com" required>
                     </div>
 
                     <div class="mb-5 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                         <input type="password" name="password"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="Minimal 8 karakter">
+                            placeholder="Minimal 8 karakter" required>
                     </div>
 
                     <div class="mb-8 text-left">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Ulangi Password</label>
                         <input type="password" name="password_confirmation"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="Masukkan ulang password">
+                            placeholder="Masukkan ulang password" required>
                     </div>
 
                     <button type="submit"

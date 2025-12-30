@@ -181,7 +181,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center text-slate-400 font-medium">Belum ada data donasi.
+                            <td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">Belum ada data donasi.
                             </td>
                         </tr>
                     @endforelse

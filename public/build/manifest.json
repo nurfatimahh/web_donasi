@@ -1,0 +1,35 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BbSnHXFe.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-DmhLj93R.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CAiCLEjY.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/donations.js": {
+    "file": "assets/donations-B0WB7g2r.js",
+    "name": "donations",
+    "src": "resources/js/donations.js",
+    "isEntry": true
+  },
+  "resources/js/surah.js": {
+    "file": "assets/surah-BB5EyXr-.js",
+    "name": "surah",
+    "src": "resources/js/surah.js",
+    "isEntry": true
+  }
+}

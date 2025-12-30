@@ -74,7 +74,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="px-6 py-12 text-center text-slate-400 font-medium italic">
+                            <td colspan="3" class="px-6 py-12 text-center text-slate-500 font-medium">
                                 Data program tidak ditemukan.
                             </td>
                         </tr>

@@ -30,13 +30,12 @@
             @endforeach
         </div>
 
-        <!-- MODAL SATU SAJA -->
         <div id="program-modal" class="fixed inset-0 z-50 bg-black/50 hidden flex items-center justify-center px-4 transition-opacity duration-300" style="opacity:0;">
             <div class="bg-white max-w-2xl w-full rounded-2xl p-8 relative max-h-[90vh] overflow-y-auto scroll-smooth transform scale-95 transition-all duration-300">
                 
                 <img id="modal-gambar" src="" class="w-full h-72 object-cover rounded-xl mb-6" alt="">
                 <h2 id="modal-nama" class="text-2xl font-bold text-green-800 mb-4"></h2>
-                <p id="modal-deskripsi" class="text-gray-700 leading-relaxed mb-6"></p>
+                <p id="modal-deskripsi" class="text-gray-700 leading-relaxed mb-6 text-justify"></p>
 
                 <div class="text-center">
                     <button id="modal-close" class="bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-700">Tutup</button>
