@@ -26,7 +26,7 @@ class NeedTable extends Component
 
         $needs = Need::where('nama_barang', 'like', '%' . $this->search . '%')
             ->latest()
-            ->paginate(5); // Saya ubah ke 5 dulu untuk tes
+            ->paginate(10);
 
         return view('livewire.admin.need-table', [
             'needs' => $needs
