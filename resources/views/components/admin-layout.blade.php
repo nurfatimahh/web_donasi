@@ -167,7 +167,7 @@
                                 Kembali ke Beranda
                             </a>
 
-                            <a href="/admin/profile"
+                            <a href="{{ route('profile.index') }}"
                                 class="flex items-center gap-3 px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 font-semibold transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
