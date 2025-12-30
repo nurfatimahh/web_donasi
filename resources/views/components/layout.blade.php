@@ -38,8 +38,31 @@
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+@if(session('success'))
+    <div id="modalSuccess" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center transform scale-100 transition-all animate-in zoom-in duration-300">
+
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Alhamdulillah!</h3>
+            <p class="text-gray-600 mb-8">
+                {{ session('success') }}
+            </p>
+
+            <button onclick="document.getElementById('modalSuccess').remove()" 
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-lg shadow-green-200">
+                Tutup
+            </button>
+        </div>
+    </div>
+    @endif
+    
     {{ $slot }}
     @if(!request()->is('/', 'login*', 'register*'))
         @auth
@@ -79,7 +102,7 @@
                 </div>
 
                 <div class="overflow-y-auto p-8 pt-0 scrollbar-thin scrollbar-thumb-gray-200">
-                    <form action="{{ route('admin.donations.store') }}" method="POST" id="formDonasiGlobal"
+                    <form action="{{ route('donations.store') }}" method="POST" id="formDonasiGlobal"
                         class="space-y-4" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="jenis_donasi" id="jenis_donasi_global" value="uang">

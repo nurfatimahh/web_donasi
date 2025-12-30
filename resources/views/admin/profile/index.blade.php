@@ -14,7 +14,7 @@
             <p class="text-gray-500">Kelola informasi dan foto profil Anda</p>
         </div>
         {{-- Mengarahkan kembali ke dashboard admin atau user --}}
-        <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}"
+        <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('home') }}"
            class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">
             ← Kembali
         </a>
