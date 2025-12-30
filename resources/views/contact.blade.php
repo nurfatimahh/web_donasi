@@ -6,8 +6,8 @@
         <div class="container mx-auto">
             <h1 class="text-white text-3xl font-bold mb-2">Hubungi Kami</h1>
             <p class="text-green-100 opacity-90 max-w-xl mx-auto">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                dolores itaque animi molestias, in quis.
+                Tuliskan Saran Anda atau Pertanyaan seputar DonasiKita
+            </p>
         </div>
     </section>
 
@@ -62,9 +62,8 @@
 
                     <h3 class="text-2xl font-bold text-green-800 mb-6">Informasi Kontak</h3>
                     <p class="text-gray-600 mb-8 leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorem vero excepturi nisi
-                        in cumque quidem cum impedit obcaecati voluptates quos delectus fugiat accusantium consectetur
-                        est non numquam commodi tempora?
+                        Jika Anda memiliki pertanyaan lebih lanjut atau membutuhkan bantuan, jangan ragu untuk menghubungi kami melalui informasi di bawah ini. 
+                        Kami siap membantu Anda!
                     </p>
 
                     <div class="space-y-6">
@@ -82,8 +81,8 @@
                             <div>
                                 <h4 class="font-bold text-gray-800">Alamat</h4>
                                 <p class="text-gray-600 text-sm mt-1">
-                                    Jl. Kebaikan No. 00<br>
-                                    Bandung, Indonesia 12345
+                                    Kp.Manglayang <br>
+                                    Kab.Bandung Barat, Indonesia
                                 </p>
                             </div>
                         </div>
@@ -112,7 +111,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-gray-800">WhatsApp / Telepon</h4>
-                                <p class="text-gray-600 text-sm mt-1">0000000000</p>
+                                <p class="text-gray-600 text-sm mt-1">088210568578</p>
                             </div>
                         </div>
 
