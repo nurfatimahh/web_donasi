@@ -1,6 +1,7 @@
 <x-admin-layout pageTitle="Kelola Program Donasi">
     <div class="mb-6">
         <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Daftar Program</h2>
+        <p class="text-slate-400 text-xs font-medium uppercase tracking-widest mt-1">Teing</p>
     </div>
 
     @livewire('admin.program-table')

@@ -66,7 +66,7 @@
                     <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
                         Latar Belakang Pembangunan Masjid An - Nurul Fajri
                     </h2>
-                    <p class="text-gray-600 leading-relaxed text-left">
+                    <p class="text-gray-600 leading-relaxed text-justify">
                         Dalam menyikapi perkembangan zaman yang begitu pesat, dibutuhkan lembaga
                         pendidikan (dalam hal ini Agama Islam) yang mampu menjadi tempat yang nyaman
                         dan aman dalam proses belajar mengajarnya dengan segala kelengkapan sarana
@@ -79,7 +79,7 @@
                     <br>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <p class="text-gray-600 leading-relaxed text-left">
+                    <p class="text-gray-600 leading-relaxed text-justify">
                         Majelis Ta'lim Riyadhul Badi'ah yang menaungi pembangunan Masjid
                         An-Nurul Fajri yang merupakan lembaga pendidikan swadaya yang berdiri
                         pada tanggal 05 Mei 2018. Disebuah rumah kosong milik salah seorang
@@ -89,7 +89,7 @@
                         menimba ilmu Agama Islam.
                     </p>
                     <br>
-                    <p class="text-gray-600 leading-relaxed text-left">
+                    <p class="text-gray-600 leading-relaxed text-justify">
                         Bagi mereka yang membangun tempat ibadah/tempat pendidikan Islam atau
                         menyediakan dana, barang, jasa dan lain-lain untuk pembangunan-pembangunan
                         tersebut, relevan seperti dalam Firman Allah SWT. dalam Q.S. Al-Baqarah ayat 261:
@@ -100,7 +100,7 @@
                     </p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <p class="text-gray-600 leading-relaxed text-left">
+                    <p class="text-gray-600 leading-relaxed text-justify">
                         Pengadaan Rumah Ibadah/fasilitas pendidikan keagamaan (Islam) termasuk
                         salah satu investasi amal bagi kita semua, yang akan mengalirkan pahala terusmenerus
                         bagi orang-orang yang membangunnya, walau hanya sebutir paku yang
@@ -111,7 +111,7 @@
                         yang soleh yang mendoakan orang-tuanya”. (HR Muslim)
                     </p>
                     <br>
-                    <p class="text-gray-600 leading-relaxed text-left">
+                    <p class="text-gray-600 leading-relaxed text-justify">
                         Insya Allah, janji itu akan tiba pada kita semua yang sudah berpartisipasi atas
                         pembangunan tersebut.
                         Aamiin
@@ -204,7 +204,7 @@
                             <label class="block text-xs font-bold text-gray-400 uppercase">Upload Bukti Transfer
                                 (Gambar)</label>
                             <input type="file" name="bukti_transfer" id="inputBukti" accept="image/*"
-                                class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100">
+                                class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100" required>
                         </div>
                     </div>
 

@@ -44,7 +44,7 @@
             <div class="flex flex-col items-center">
                 {{-- Foto Profil --}}
                 <img id="preview" 
-                     src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) }}"
+                     src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) }}"
                      class="w-32 h-32 rounded-full object-cover border-4 {{ auth()->user()->role === 'admin' ? 'border-green-500' : 'border-blue-500' }}">
                 
                 <label class="mt-4 cursor-pointer text-sm font-semibold {{ auth()->user()->role === 'admin' ? 'text-green-700' : 'text-blue-700' }}">

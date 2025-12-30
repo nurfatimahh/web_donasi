@@ -35,13 +35,13 @@ class ProfileController extends Controller
         // Tangani upload foto
         if ($request->hasFile('photo')) {
             // Hapus foto lama jika ada
-            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
-                Storage::disk('public')->delete($user->photo);
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
             }
             
             // Simpan foto baru
             $path = $request->file('photo')->store('profile', 'public');
-            $user->photo = $path;
+            $user->avatar = $path;
         }
 
         // Simpan data lainnya

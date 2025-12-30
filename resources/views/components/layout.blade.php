@@ -138,7 +138,7 @@
                             <div>
                                 <label class="block text-xs font-bold text-gray-400 uppercase">Upload Bukti Transfer</label>
                                 <input type="file" name="bukti_transfer" id="inputBuktiGlobal" accept="image/*"
-                                    class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100">
+                                    class="w-full mt-1 p-2 border border-gray-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100" required>
                             </div>
                         </div>
 

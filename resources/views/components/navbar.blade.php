@@ -125,8 +125,8 @@
                         class="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full border border-white/20 transition-all cursor-pointer focus:outline-none">
                         
                         {{-- MODIFIKASI FOTO PROFIL DI SINI --}}
-                        @if(Auth::user()->photo)
-                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" 
+                        @if(Auth::user()->avatar)
+                            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" 
                                 alt="Profile" 
                                 class="w-8 h-8 rounded-full object-cover shadow-sm border border-white/50">
                         @else

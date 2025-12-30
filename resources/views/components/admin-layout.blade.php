@@ -127,8 +127,8 @@
                             class="flex items-center gap-2 sm:gap-3 bg- hover:bg-emerald-100 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full border border-transparent hover:border-slate-200 transition-all cursor-pointer focus:outline-none">
 
                             {{-- LOGIKA FOTO PROFIL --}}
-                            @if(Auth::user()->photo)
-                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Profile"
+                            @if(Auth::user()->avatar)
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Profile"
                                     class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-emerald-200 shadow-sm">
                             @else
                                 <div
